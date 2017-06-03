@@ -17,15 +17,25 @@ While we want to support these custom envs, the main goal is to come up with a s
 
 ### Pre-defined tasks
 
-**CustomHopperGravityHalf-v0** - The standard Mujoco OpenAI gym hopper task, but with half the gravity
+**CustomHopperGravityHalf-v0** 
 
-**CustomHopperGravityThreeQuarters-v0** - The standard Mujoco OpenAI gym hopper task, but with .75 the gravity
+The standard Mujoco OpenAI gym hopper task, but with half the gravity
 
-**CustomHopperGravityOneAndHalf-v0** - The standard Mujoco OpenAI gym hopper task, but with 1.5 the gravity
+**CustomHopperGravityThreeQuarters-v0** 
 
-**CustomHopperGravityOneAndQuarter-v0** - The standard Mujoco OpenAI gym hopper task, but with 1.25 the gravity
+The standard Mujoco OpenAI gym hopper task, but with .75 the gravity
 
-**HopperWall-v0** - The standard Mujoco OpenAI gym hopper task but with a wall place randomly in the path
+**CustomHopperGravityOneAndHalf-v0** 
+
+The standard Mujoco OpenAI gym hopper task, but with 1.5 the gravity
+
+**CustomHopperGravityOneAndQuarter-v0** 
+
+The standard Mujoco OpenAI gym hopper task, but with 1.25 the gravity
+
+**HopperWall-v0** 
+
+The standard Mujoco OpenAI gym hopper task but with a wall place randomly in the path
 
 ### Creating a new Mujoco task
 
