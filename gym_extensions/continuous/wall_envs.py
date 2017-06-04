@@ -54,7 +54,7 @@ def WallEnvFactory(class_type):
         MAZE_MAKE_CONTACTS = False
 
         # manually give a penalty if the torso comes into contact with the wall
-        MANUAL_COLLISION = True
+        MANUAL_COLLISION = False
         # TODO: this suckssssss, maye shouldn't use mujoco at all.
 
         def __init__(

@@ -10,7 +10,7 @@ from gym.envs.mujoco.half_cheetah import HalfCheetahEnv
 import os
 import gym
 
-HalfCheetahWallEnv = lambda *args, **kwargs : WallEnvFactory(HalfCheetahWithSensorEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", ori_ind=-1, *args, **kwargs)
+HalfCheetahWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", ori_ind=-1, *args, **kwargs)
 
 HalfCheetahGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", *args, **kwargs)
 

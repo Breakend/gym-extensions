@@ -10,9 +10,9 @@ from gym.envs.mujoco.humanoid import HumanoidEnv, mass_center
 import os
 import gym
 
-HumanoidWallEnv = lambda *args, **kwargs : WallEnvFactory(HumanoidWithSensorEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", ori_ind=-1, *args, **kwargs)
+HumanoidWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHumanoidEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", ori_ind=-1, *args, **kwargs)
 
-HumanoidStandupAndRunWallEnv = lambda *args, **kwargs : WallEnvFactory(HumanoidStandupAndRunEnvWithSensor)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", ori_ind=-1, *args, **kwargs)
+HumanoidStandupAndRunWallEnv = lambda *args, **kwargs : WallEnvFactory(HumanoidStandupAndRunEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", ori_ind=-1, *args, **kwargs)
 
 HumanoidGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHumanoidEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", *args, **kwargs)
 

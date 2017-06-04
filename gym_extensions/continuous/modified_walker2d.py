@@ -10,7 +10,7 @@ from gym.envs.mujoco.walker2d import Walker2dEnv
 import os
 import gym
 
-Walker2dWallEnv = lambda *args, **kwargs : WallEnvFactory(Walker2dWithSensorEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", ori_ind=-1, *args, **kwargs)
+Walker2dWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", ori_ind=-1, *args, **kwargs)
 
 Walker2dGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", *args, **kwargs)
 

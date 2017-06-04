@@ -10,7 +10,7 @@ from gym.envs.mujoco.hopper import HopperEnv
 import os
 import gym
 
-HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(HopperWithSensorEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
 
 HopperGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", *args, **kwargs)
 
@@ -28,7 +28,7 @@ class HopperWithSensorEnv(HopperEnv, utils.EzPickle):
     Adds empty sensor readouts, this is to be used when transfering to WallEnvs where we get sensor readouts with distances to the wall
     """
 
-    def __init__(self, n_bins=5, **kwargs):
+    def __init__(self, n_bins=10, **kwargs):
         self.n_bins = n_bins
         mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 4)
         utils.EzPickle.__init__(self)
