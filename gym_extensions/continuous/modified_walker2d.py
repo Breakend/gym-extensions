@@ -15,7 +15,7 @@ Walker2dWallEnv = lambda *args, **kwargs : WallEnvFactory(Walker2dWithSensorEnv)
 Walker2dGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", *args, **kwargs)
 
 
-class ModifiedWalker2dEnv(HopperEnv, utils.EzPickle):
+class ModifiedWalker2dEnv(Walker2dEnv, utils.EzPickle):
     """
     Simply allows changing of XML file, probably not necessary if we pull request the xml name as a kwarg in openai gym
     """

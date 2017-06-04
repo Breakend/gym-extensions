@@ -17,7 +17,7 @@ HumanoidStandupAndRunWallEnv = lambda *args, **kwargs : WallEnvFactory(HumanoidS
 HumanoidGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHumanoidEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", *args, **kwargs)
 
 
-class ModifiedHumanoidEnv(HopperEnv, utils.EzPickle):
+class ModifiedHumanoidEnv(HumanoidEnv, utils.EzPickle):
     """
     Simply allows changing of XML file, probably not necessary if we pull request the xml name as a kwarg in openai gym
     """

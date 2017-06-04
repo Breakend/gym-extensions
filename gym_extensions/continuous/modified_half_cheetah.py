@@ -15,7 +15,7 @@ HalfCheetahWallEnv = lambda *args, **kwargs : WallEnvFactory(HalfCheetahWithSens
 HalfCheetahGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", *args, **kwargs)
 
 
-class ModifiedHalfCheetahEnv(HopperEnv, utils.EzPickle):
+class ModifiedHalfCheetahEnv(HalfCheetahEnv, utils.EzPickle):
     """
     Simply allows changing of XML file, probably not necessary if we pull request the xml name as a kwarg in openai gym
     """
