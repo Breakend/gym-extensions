@@ -1,4 +1,6 @@
 import gym
+import os
+import gym.envs.mujoco
 
 custom_envs = {
             "CustomHopperGravityHalf-v0" :
@@ -22,10 +24,15 @@ custom_envs = {
                      reward_threshold=3800.0,
                      kwargs= dict(xml_name='hopper_gravity_one_and_quarter.xml')),
             "HopperWall-v0" :
-                dict(path='gym_extensions.continuous.modified_hopper:ModifiedHopperEnv',
+                dict(path='gym_extensions.continuous.modified_hopper:HopperWallEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_name='hopper_wall.xml')),
+                     kwargs= dict()),
+            "HopperWithSensor-v1" :
+                dict(path='gym_extensions.continuous.modified_hopper:HopperWithSensorEnv',
+                     max_episode_steps=1000,
+                     reward_threshold=3800.0,
+                     kwargs= dict(xml_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml"))
                      }
 
 def register_custom_envs():

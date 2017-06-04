@@ -2,42 +2,37 @@ import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
 import os.path as osp
+from gym_extensions.continuous.wall_envs import WallEnvFactory
+from rllab.core.serializable import Serializable
+from gym.envs.mujoco.hopper import HopperEnv
 
-class ModifiedHopperEnv(mujoco_env.MujocoEnv, utils.EzPickle):
+import os
+import gym
+HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(HopperWithSensorEnv)(xml_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+
+
+class ModifiedHopperEnv(HopperEnv, utils.EzPickle):
     def __init__(self, **kwargs):
         # import pdb; pdb.set_trace()
-        abs_path = osp.abspath(osp.join(osp.dirname(__file__), '.'))
-        mujoco_env.MujocoEnv.__init__(self, abs_path + "/mujoco_xmls/" + kwargs["xml_name"], 4)
+        # abs_path =
+        mujoco_env.MujocoEnv.__init__(self, osp.abspath(osp.join(osp.dirname(__file__), '.')) + "/mujoco_xmls/" + kwargs["xml_name"], 4)
+        # mujoco_env.MujocoEnv.__init__(self, kwargs["xml_path"], 4)
         utils.EzPickle.__init__(self)
 
-    def _step(self, a):
-        posbefore = self.model.data.qpos[0, 0]
-        self.do_simulation(a, self.frame_skip)
-        posafter, height, ang = self.model.data.qpos[0:3, 0]
-        alive_bonus = 1.0
-        reward = (posafter - posbefore) / self.dt
-        reward += alive_bonus
-        reward -= 1e-3 * np.square(a).sum()
-        s = self.state_vector()
-        done = not (np.isfinite(s).all() and (np.abs(s[2:]) < 100).all() and
-                    (height > .7) and (abs(ang) < .2))
-        ob = self._get_obs()
-        return ob, reward, done, {}
+class HopperWithSensorEnv(HopperEnv, utils.EzPickle):
+    def __init__(self, n_bins=5, **kwargs):
+        # import pdb; pdb.set_trace()
+        # abs_path = osp.abspath(osp.join(osp.dirname(__file__), '.'))
+        # mujoco_env.MujocoEnv.__init__(self, abs_path + "/mujoco_xmls/" + kwargs["xml_name"], 4)
+        self.n_bins = n_bins
+        mujoco_env.MujocoEnv.__init__(self, kwargs["xml_path"], 4)
+        utils.EzPickle.__init__(self)
+
 
     def _get_obs(self):
-        return np.concatenate([
-            self.model.data.qpos.flat[1:],
-            np.clip(self.model.data.qvel.flat, -10, 10)
+        obs = np.concatenate([
+            HopperEnv._get_obs(self),
+            np.zeros(self.n_bins)
+            # goal_readings
         ])
-
-    def reset_model(self):
-        qpos = self.init_qpos + self.np_random.uniform(low=-.005, high=.005, size=self.model.nq)
-        qvel = self.init_qvel + self.np_random.uniform(low=-.005, high=.005, size=self.model.nv)
-        self.set_state(qpos, qvel)
-        return self._get_obs()
-
-    def viewer_setup(self):
-        self.viewer.cam.trackbodyid = 2
-        self.viewer.cam.distance = self.model.stat.extent * 0.75
-        self.viewer.cam.lookat[2] += .8
-        self.viewer.cam.elevation = -20
+        return obs
