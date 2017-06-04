@@ -191,7 +191,7 @@ def WallEnvFactory(class_type):
 
         def __init__(
                 self,
-                xml_path,
+                model_path,
                 ori_ind,
                 wall_height = .25,
                 wall_pos_range = ([1.8, 0.0], [3.8, 0.0]),
@@ -207,9 +207,9 @@ def WallEnvFactory(class_type):
             self._sensor_range = sensor_range
             self._sensor_span = sensor_span
 
-            # xml_path = os.path.dirname(gym.envs.mujoco.__file__) + "/assets/" + xml_name
-            # xml_path = osp.join(MODEL_DIR, path)
-            tree = ET.parse(xml_path)
+            # model_path = os.path.dirname(gym.envs.mujoco.__file__) + "/assets/" + xml_name
+            # model_path = osp.join(MODEL_DIR, path)
+            tree = ET.parse(model_path)
             worldbody = tree.find(".//worldbody")
 
             height = wall_height
@@ -263,7 +263,7 @@ def WallEnvFactory(class_type):
             # self._goal_range = self._find_goal_range()
             self._cached_segments = None
 
-            class_type.__init__(self, xml_path=file_path)
+            class_type.__init__(self, model_path=file_path)
             utils.EzPickle.__init__(self)
 
             # import pdb; pdb.set_trace()

@@ -4,25 +4,25 @@ import gym.envs.mujoco
 
 custom_envs = {
             "CustomHopperGravityHalf-v0" :
-                dict(path='gym_extensions.continuous.modified_hopper:ModifiedHopperEnv',
+                dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_name='hopper_gravity_half.xml')),
+                     kwargs= dict(gravity=-4.905)),
             "CustomHopperGravityThreeQuarters-v0" :
-                dict(path='gym_extensions.continuous.modified_hopper:ModifiedHopperEnv',
+                dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_name='hopper_gravity_three_quarters.xml')),
+                     kwargs= dict(gravity=-7.3575)),
             "CustomHopperGravityOneAndHalf-v0" :
-                dict(path='gym_extensions.continuous.modified_hopper:ModifiedHopperEnv',
+                dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_name='hopper_gravity_one_and_half.xml')),
+                     kwargs= dict(gravity=-14.715)),
             "CustomHopperGravityOneAndQuarter-v0" :
-                dict(path='gym_extensions.continuous.modified_hopper:ModifiedHopperEnv',
+                dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_name='hopper_gravity_one_and_quarter.xml')),
+                     kwargs= dict(gravity=-12.2625)),
             "HopperWall-v0" :
                 dict(path='gym_extensions.continuous.modified_hopper:HopperWallEnv',
                      max_episode_steps=1000,
@@ -32,7 +32,7 @@ custom_envs = {
                 dict(path='gym_extensions.continuous.modified_hopper:HopperWithSensorEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(xml_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml"))
+                     kwargs= dict(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml"))
                      }
 
 def register_custom_envs():

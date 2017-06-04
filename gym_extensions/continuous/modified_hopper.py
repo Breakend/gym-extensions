@@ -3,29 +3,34 @@ from gym import utils
 from gym.envs.mujoco import mujoco_env
 import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
+from gym_extensions.continuous.gravity_envs import GravityEnvFactory
 from rllab.core.serializable import Serializable
 from gym.envs.mujoco.hopper import HopperEnv
 
 import os
 import gym
-HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(HopperWithSensorEnv)(xml_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+
+HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(HopperWithSensorEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+
+HopperGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", *args, **kwargs)
 
 
 class ModifiedHopperEnv(HopperEnv, utils.EzPickle):
+    """
+    Simply allows changing of XML file, probably not necessary if we pull request the xml name as a kwarg in openai gym
+    """
     def __init__(self, **kwargs):
-        # import pdb; pdb.set_trace()
-        # abs_path =
-        mujoco_env.MujocoEnv.__init__(self, osp.abspath(osp.join(osp.dirname(__file__), '.')) + "/mujoco_xmls/" + kwargs["xml_name"], 4)
-        # mujoco_env.MujocoEnv.__init__(self, kwargs["xml_path"], 4)
+        mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 4)
         utils.EzPickle.__init__(self)
 
 class HopperWithSensorEnv(HopperEnv, utils.EzPickle):
+    """
+    Adds empty sensor readouts, this is to be used when transfering to WallEnvs where we get sensor readouts with distances to the wall
+    """
+
     def __init__(self, n_bins=5, **kwargs):
-        # import pdb; pdb.set_trace()
-        # abs_path = osp.abspath(osp.join(osp.dirname(__file__), '.'))
-        # mujoco_env.MujocoEnv.__init__(self, abs_path + "/mujoco_xmls/" + kwargs["xml_name"], 4)
         self.n_bins = n_bins
-        mujoco_env.MujocoEnv.__init__(self, kwargs["xml_path"], 4)
+        mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 4)
         utils.EzPickle.__init__(self)
 
 

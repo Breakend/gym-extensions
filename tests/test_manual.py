@@ -108,7 +108,6 @@ def test(env_id):
             a[:copy_n] = ctrl.control[:copy_n]
             # import pdb; pdb.set_trace()
             sn, rplus, done, info = env.step(a)
-            print(sn[-5:])
             reward += rplus
             #env.render("rgb_array")
             episode_over |= done
