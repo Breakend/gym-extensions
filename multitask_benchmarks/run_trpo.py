@@ -9,7 +9,8 @@ from sandbox.rocky.tf.algos.trpo import TRPO
 from rllab.misc import ext
 from sandbox.rocky.tf.optimizers.conjugate_gradient_optimizer import ConjugateGradientOptimizer
 from sandbox.rocky.tf.optimizers.conjugate_gradient_optimizer import FiniteDifferenceHvp
-
+import rllab.misc.logger as logger
+11
 import gym_extensions
 import pickle
 import os.path as osp
@@ -26,11 +27,16 @@ parser.add_argument("--num_final_rollouts", default=20, type=int, help="Number o
 parser.add_argument("--batch_size", default=25000, type=int, help="Batch_size per epoch (this is the number of (state, action) samples, not the number of rollouts)")
 parser.add_argument("--step_size", default=0.01, type=float, help="Step size for TRPO (i.e. the maximum KL bound)")
 parser.add_argument("--reg_coeff", default=1e-5, type=float, help="Regularization coefficient for TRPO")
+parser.add_argument("--text_log_file", default="./data/debug.log", help="Where text output will go")
+parser.add_argument("--tabular_log_file", default="./data/progress.csv", help="Where tabular output will go")
 args = parser.parse_args()
 
 # stub(globals())
 
 ext.set_seed(1)
+logger.add_text_output(args.text_log_file)
+logger.add_tabular_output(args.tabular_log_file)
+logger.set_log_tabular_only(False)
 
 envs = []
 
@@ -53,7 +59,7 @@ baseline = LinearFeatureBaseline(env_spec=env.spec)
 with tf.Session() as sess:
     for env_name, env in envs:
 
-        print("Training Policy on %s" % env_name)
+        logger.log("Training Policy on %s" % env_name)
 
         algo = TRPO(
             env=env,
@@ -71,7 +77,7 @@ with tf.Session() as sess:
 
         rollouts = algo.obtain_samples(args.num_epochs + 1)
 
-        print("Average reward for training rollouts on (%s): %f +- %f " % (env_name, np.mean([np.sum(p['rewards']) for p in rollouts]),  np.std([np.sum(p['rewards']) for p in rollouts])))
+        logger.log("Average reward for training rollouts on (%s): %f +- %f " % (env_name, np.mean([np.sum(p['rewards']) for p in rollouts]),  np.std([np.sum(p['rewards']) for p in rollouts])))
 
     # Final evaluation on all environments using the learned policy
 
@@ -83,6 +89,6 @@ with tf.Session() as sess:
             rollouts.append(rollout)
             total_rollouts.append(rollout)
 
-        print("Average reward for eval rollouts on (%s): %f +- %f " % (env_name, np.mean([np.sum(p['rewards']) for p in rollouts]),  np.std([np.sum(p['rewards']) for p in rollouts])))
+        logger.log("Average reward for eval rollouts on (%s): %f +- %f " % (env_name, np.mean([np.sum(p['rewards']) for p in rollouts]),  np.std([np.sum(p['rewards']) for p in rollouts])))
 
-    print("Total Average across all rollouts and envs: %f +- %f " % (np.mean([np.sum(p['rewards']) for p in total_rollouts]),  np.std([np.sum(p['rewards']) for p in total_rollouts])))
+    logger.log("Total Average across all rollouts and envs: %f +- %f " % (np.mean([np.sum(p['rewards']) for p in total_rollouts]),  np.std([np.sum(p['rewards']) for p in total_rollouts])))
