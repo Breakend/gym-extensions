@@ -49,7 +49,7 @@ class HumanoidStandupAndRunEnv(HumanoidEnv, utils.EzPickle):
     Environment that rewards standing up and the running, this is the combination of Humanoid-v1 and HumanoidStandup-v1
     """
     def __init__(self, model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", **kwargs):
-        mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 5)
+        mujoco_env.MujocoEnv.__init__(self, model_path, 5)
         utils.EzPickle.__init__(self)
 
     def _step(self, a):
