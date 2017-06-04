@@ -59,7 +59,7 @@ class HumanoidStandupAndRunEnv(HumanoidEnv, utils.EzPickle):
 
         pos_after_standup = pos_after[2][0]
 
-        down = bool((qpos[2] < 1.0) or (qpos[2] > 2.0))
+        down = bool((pos_after[2] < 1.0) or (pos_after[2] > 2.0))
 
         alive_bonus = 5.0 if not down else 1.0
 
@@ -86,7 +86,7 @@ class HumanoidStandupAndRunEnvWithSensor(HumanoidStandupAndRunEnv, utils.EzPickl
     def __init__(self, model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", n_bins=10, **kwargs):
         self.n_bins = n_bins
         mujoco_env.MujocoEnv.__init__(self, model_path, 5)
-        utils.EzPickle.__init
+        utils.EzPickle.__init__(self)
 
     def _get_obs(self):
         obs = np.concatenate([
