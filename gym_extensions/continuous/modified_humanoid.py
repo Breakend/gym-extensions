@@ -85,7 +85,7 @@ class HumanoidStandupAndRunEnvWithSensor(HumanoidStandupAndRunEnv, utils.EzPickl
     """
     def __init__(self, model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", n_bins=10, **kwargs):
         self.n_bins = n_bins
-        mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 5)
+        mujoco_env.MujocoEnv.__init__(self, model_path, 5)
         utils.EzPickle.__init
 
     def _get_obs(self):
