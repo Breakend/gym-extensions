@@ -3,6 +3,11 @@ import os
 import gym.envs.mujoco
 
 custom_envs = {
+            "PusherGravityNormal-v0":
+                dict(path='gym_extensions.continuous.modified_arm:ArmGravityEnv',
+                     max_episode_steps=100,
+                     reward_threshold=0.0,
+                     kwargs= dict()),
             "HopperGravityHalf-v0" :
                 dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
