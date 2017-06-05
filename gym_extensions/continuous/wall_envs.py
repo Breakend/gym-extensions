@@ -5,12 +5,6 @@ import math
 
 import numpy as np
 
-from rllab import spaces
-from rllab.envs.base import Step
-from rllab.envs.proxy_env import ProxyEnv
-
-from rllab.misc.overrides import overrides
-from rllab.envs.mujoco.maze.maze_env_utils import ray_segment_intersect, point_distance
 import gym
 import random
 import os
@@ -235,7 +229,7 @@ def WallEnvFactory(class_type):
             next_obs = self._get_obs()
 
             x, y = self.get_body_com("torso")[:2]
-            return Step(next_obs, reward, done, **info)
+            return next_obs, reward, done, info
 
         def action_from_key(self, key):
             return self.action_from_key(key)

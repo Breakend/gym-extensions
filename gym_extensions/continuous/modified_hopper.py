@@ -4,7 +4,6 @@ from gym.envs.mujoco import mujoco_env
 import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
 from gym_extensions.continuous.gravity_envs import GravityEnvFactory
-from rllab.core.serializable import Serializable
 from gym.envs.mujoco.hopper import HopperEnv
 
 import os

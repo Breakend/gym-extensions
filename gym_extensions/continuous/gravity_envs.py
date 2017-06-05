@@ -4,13 +4,6 @@ import xml.etree.ElementTree as ET
 import math
 
 import numpy as np
-
-from rllab import spaces
-from rllab.envs.base import Step
-from rllab.envs.proxy_env import ProxyEnv
-
-from rllab.misc.overrides import overrides
-from rllab.envs.mujoco.maze.maze_env_utils import ray_segment_intersect, point_distance
 import gym
 import random
 import os
