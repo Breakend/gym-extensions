@@ -15,9 +15,7 @@ While we want to support these custom envs, the main goal is to come up with a s
 
 ## Continuous Envs
 
-### Pre-defined tasks
-
-#### Modified Gravity
+### Modified Gravity
 
 **HopperGravityHalf-v0**
 
@@ -62,11 +60,11 @@ HumanoidGravityOneAndQuarter-v0
 
 HumanoidGravityOneAndHalf-v0
 
-#### Humanoid Standup and Run
+### Humanoid Standup and Run
 
 This rewards standing up and running. Combines the reward from HumanoidStandup and Humanoid.
 
-#### Adding a randomly placed Wall and Sensors to detect it
+### Adding a randomly placed Wall and Sensors to detect it
 
 
 **Walker2dWithSensor-v0**
@@ -99,7 +97,7 @@ HalfCheetahWithSensor-v0
 
 HumanoidStandupWithSensor-v0
 
-#### Arm envs
+### Arm envs
 
 ** StrikerMovingStart-v0 **
 
