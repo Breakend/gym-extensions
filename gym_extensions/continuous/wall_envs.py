@@ -13,6 +13,7 @@ from gym.envs.mujoco import mujoco_env
 from pyrr.utils import all_parameters_as_numpy_arrays
 import pyrr
 import math
+import six
 
 def isclose(a, b, rel_tol=1e-04, abs_tol=0.0):
     # TODO: move to util func
@@ -131,7 +132,6 @@ def WallEnvFactory(class_type):
             # import pdb; pdb.set_trace()
 
         def get_body_xquat(self, body_name):
-            import six
             idx = self.model.body_names.index(six.b(body_name))
             return self.model.data.xquat[idx]
 

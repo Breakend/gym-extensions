@@ -5,6 +5,7 @@ import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
 from gym_extensions.continuous.gravity_envs import GravityEnvFactory
 from gym.envs.mujoco.walker2d import Walker2dEnv
+from gym_extensions.continuous.perturbed_bodypart_env import ModifiedSizeEnvFactory
 
 import os
 import gym
@@ -12,6 +13,8 @@ import gym
 Walker2dWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", ori_ind=-1, *args, **kwargs)
 
 Walker2dGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", *args, **kwargs)
+
+Walker2dModifiedBodyPartSizeEnv = lambda *args, **kwargs : ModifiedSizeEnvFactory(ModifiedWalker2dEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/walker2d.xml", *args, **kwargs)
 
 
 class ModifiedWalker2dEnv(Walker2dEnv, utils.EzPickle):

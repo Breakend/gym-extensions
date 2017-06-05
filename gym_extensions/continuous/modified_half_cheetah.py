@@ -5,6 +5,7 @@ import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
 from gym_extensions.continuous.gravity_envs import GravityEnvFactory
 from gym.envs.mujoco.half_cheetah import HalfCheetahEnv
+from gym_extensions.continuous.perturbed_bodypart_env import ModifiedSizeEnvFactory
 
 import os
 import gym
@@ -12,6 +13,8 @@ import gym
 HalfCheetahWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", ori_ind=-1, *args, **kwargs)
 
 HalfCheetahGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", *args, **kwargs)
+
+HalfCheetahModifiedBodyPartSizeEnv = lambda *args, **kwargs : ModifiedSizeEnvFactory(ModifiedHalfCheetahEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/half_cheetah.xml", *args, **kwargs)
 
 
 class ModifiedHalfCheetahEnv(HalfCheetahEnv, utils.EzPickle):

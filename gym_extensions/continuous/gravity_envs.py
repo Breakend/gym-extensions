@@ -27,6 +27,8 @@ def GravityEnvFactory(class_type):
             class_type.__init__(self, model_path=model_path)
             utils.EzPickle.__init__(self)
 
+            import pdb; pdb.set_trace()
+
             # make sure we're using a proper OpenAI gym Mujoco Env
             assert isinstance(self, mujoco_env.MujocoEnv)
 

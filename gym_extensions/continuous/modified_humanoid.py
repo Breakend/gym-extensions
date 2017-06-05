@@ -5,6 +5,8 @@ import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
 from gym_extensions.continuous.gravity_envs import GravityEnvFactory
 from gym.envs.mujoco.humanoid import HumanoidEnv, mass_center
+from gym.envs.mujoco.humanoidstandup import HumanoidStandupEnv
+from gym_extensions.continuous.perturbed_bodypart_env import ModifiedSizeEnvFactory
 
 import os
 import gym
@@ -14,6 +16,8 @@ HumanoidWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHumanoidEnv)(m
 HumanoidStandupAndRunWallEnv = lambda *args, **kwargs : WallEnvFactory(HumanoidStandupAndRunEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoidstandup.xml", ori_ind=-1, *args, **kwargs)
 
 HumanoidGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHumanoidEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", *args, **kwargs)
+
+HumanoidModifiedBodyPartSizeEnv = lambda *args, **kwargs : ModifiedSizeEnvFactory(ModifiedHumanoidEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/humanoid.xml", *args, **kwargs)
 
 
 class ModifiedHumanoidEnv(HumanoidEnv, utils.EzPickle):
@@ -38,6 +42,26 @@ class HumanoidWithSensorEnv(HumanoidEnv, utils.EzPickle):
     def _get_obs(self):
         obs = np.concatenate([
             HumanoidEnv._get_obs(self),
+            np.zeros(self.n_bins)
+            # goal_readings
+        ])
+        return obs
+
+
+class HumanoidStandupWithSensorEnv(HumanoidStandupEnv, utils.EzPickle):
+    """
+    Adds empty sensor readouts, this is to be used when transfering to WallEnvs where we get sensor readouts with distances to the wall
+    """
+
+    def __init__(self, n_bins=10, **kwargs):
+        self.n_bins = n_bins
+        mujoco_env.MujocoEnv.__init__(self, kwargs["model_path"], 5)
+        utils.EzPickle.__init__(self)
+
+
+    def _get_obs(self):
+        obs = np.concatenate([
+            HumanoidStandupEnv._get_obs(self),
             np.zeros(self.n_bins)
             # goal_readings
         ])
