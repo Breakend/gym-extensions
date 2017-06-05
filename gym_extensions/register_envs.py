@@ -254,7 +254,66 @@ custom_envs = {
                 dict(path='gym_extensions.continuous.modified_half_cheetah:HalfCheetahModifiedBodyPartSizeEnv',
                      max_episode_steps=1000,
                      reward_threshold=4800.0,
-                     kwargs= dict(body_parts=["head"], size_scale=1.25))
+                     kwargs= dict(body_parts=["head"], size_scale=1.25)),
+
+
+            # Modified body parts - Humanoid
+            "HumanoidBigTorso-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["torso1", "uwaist", "lwaist"], size_scale=1.25)),
+            "HumanoidBigThigh-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_thigh1", "left_thigh1", "butt"], size_scale=1.25)),
+            "HumanoidBigLeg-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_shin1", "left_shin1"], size_scale=1.25)),
+            "HumanoidBigFoot-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["left_foot", "right_foot"], size_scale=1.25)),
+            "HumanoidSmallTorso-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["torso1", "uwaist", "lwaist"], size_scale=.75)),
+            "HumanoidSmallThigh-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_thigh1", "left_thigh1", "butt"], size_scale=.75)),
+            "HumanoidSmallLeg-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_shin1", "left_shin1"], size_scale=.75)),
+            "HumanoidSmallFoot-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["left_foot", "right_foot"], size_scale=.75)),
+            "HumanoidSmallHead-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["head"], size_scale=.75)),
+            "HumanoidBigHead-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["head"], size_scale=1.25)),
+            "HumanoidSmallArm-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_uarm1", "right_larm", "left_uarm1", "left_larm"], size_scale=.75)),
+            "HumanoidBigArm-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["right_uarm1", "right_larm", "left_uarm1", "left_larm"], size_scale=1.25)),
+            "HumanoidSmallHand-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["left_hand", "right_hand"], size_scale=.75)),
+            "HumanoidBigHand-v0" :
+                dict(path='gym_extensions.continuous.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(body_parts=["left_hand", "right_hand"], size_scale=1.25))
                      }
 
 def register_custom_envs():
