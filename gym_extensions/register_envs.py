@@ -3,8 +3,6 @@ import os
 import gym.envs.mujoco
 
 custom_envs = {
-
-
             # Pusher modifications
             "PusherMovingGoal-v0":
                 dict(path='gym_extensions.continuous.modified_arm:PusherMovingGoalEnv',

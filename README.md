@@ -17,23 +17,94 @@ While we want to support these custom envs, the main goal is to come up with a s
 
 ### Pre-defined tasks
 
-**CustomHopperGravityHalf-v0** 
+#### Modified Gravity
+
+**HopperGravityHalf-v0**
 
 The standard Mujoco OpenAI gym hopper task, but with half the gravity
 
-**CustomHopperGravityThreeQuarters-v0** 
+**HopperGravityThreeQuarters-v0**
 
 The standard Mujoco OpenAI gym hopper task, but with .75 the gravity
 
-**CustomHopperGravityOneAndHalf-v0** 
-
-The standard Mujoco OpenAI gym hopper task, but with 1.5 the gravity
-
-**CustomHopperGravityOneAndQuarter-v0** 
+**HopperGravityOneAndQuarter-v0**
 
 The standard Mujoco OpenAI gym hopper task, but with 1.25 the gravity
 
-**HopperWall-v0** 
+**HopperGravityOneAndHalf-v0**
 
-The standard Mujoco OpenAI gym hopper task but with a wall place randomly in the path
+The standard Mujoco OpenAI gym hopper task, but with 1.5 the gravity
 
+
+**Similarly:**
+
+Walker2dGravityHalf-v0
+
+Walker2dGravityThreeQuarters-v0
+
+Walker2dGravityOneAndQuarter-v0
+
+Walker2dGravityOneAndHalf-v0
+
+HalfCheetahGravityThreeQuarters-v0
+
+HalfCheetahGravityOneAndHalf-v0
+
+HalfCheetahGravityOneAndQuarter-v0
+
+HalfCheetahGravityHalf-v0
+
+HumanoidGravityHalf-v0
+
+HumanoidGravityThreeQuarters-v0
+
+HumanoidGravityOneAndQuarter-v0
+
+HumanoidGravityOneAndHalf-v0
+
+#### Humanoid Standup and Run
+
+This rewards standing up and running. Combines the reward from HumanoidStandup and Humanoid.
+
+#### Adding a randomly placed Wall and Sensors to detect it
+
+
+**Walker2dWithSensor-v0**
+
+Same as the Walker2d env in OpenAI gym, but with empty sensor readouts (10 by default) which would detect a wall if it were there. This is to keep the state space the same for transfer learning to a Wall env
+
+**Walker2dWall-v0**
+
+Ray tracing distance sensors emitted from the torso (10 rays by default in a 90 degree arc). Return distance as normalized number from 0-1 such that it is a percentage of the overall maximum ray detection distance. A wall is randomly placed in the path of the agent.
+
+**Similarly:**
+
+HopperWall-v0
+
+HalfCheetahWall-v0
+
+HumanoidStandupAndRunWall-v0
+
+HumanoidWall-v0
+
+HopperWithSensor-v0
+
+HumanoidStandupAndRunWithSensor-v0
+
+Walker2dWithSensor-v0
+
+HumanoidWithSensor-v0
+
+HalfCheetahWithSensor-v0
+
+HumanoidStandupWithSensor-v0
+
+#### Arm envs
+
+** StrikerMovingStart-v0 **
+
+The Striker-v0 env from OpenAI gym, but with a moving starting position as well as goal.
+
+** PusherMovingGoal-v0 **
+
+The Pusher-v0 env from OpenAI gym, but with a moving goal position as well as start position.
