@@ -60,12 +60,14 @@ HumanoidGravityOneAndQuarter-v0
 
 HumanoidGravityOneAndHalf-v0
 
-### Humanoid Standup and Run
+### Humanoid Extended Tasks
+
+
+**HumanoidStandupAndRun-v0**
 
 This rewards standing up and running. Combines the reward from HumanoidStandup and Humanoid.
 
-### Adding a randomly placed Wall and Sensors to detect it
-
+### Random Walls and Sensors
 
 **Walker2dWithSensor-v0**
 
@@ -99,10 +101,10 @@ HumanoidStandupWithSensor-v0
 
 ### Arm envs
 
-** StrikerMovingStart-v0 **
+**StrikerMovingStart-v0**
 
 The Striker-v0 env from OpenAI gym, but with a moving starting position as well as goal.
 
-** PusherMovingGoal-v0 **
+**PusherMovingGoal-v0**
 
 The Pusher-v0 env from OpenAI gym, but with a moving goal position as well as start position.
