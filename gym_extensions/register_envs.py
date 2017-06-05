@@ -3,11 +3,23 @@ import os
 import gym.envs.mujoco
 
 custom_envs = {
-            "PusherGravityNormal-v0":
-                dict(path='gym_extensions.continuous.modified_arm:ArmGravityEnv',
+
+
+            # Pusher modifications
+            "PusherMovingGoal-v0":
+                dict(path='gym_extensions.continuous.modified_arm:PusherMovingGoalEnv',
                      max_episode_steps=100,
                      reward_threshold=0.0,
                      kwargs= dict()),
+
+            # Striker
+            "StrikerMovingStart-v0":
+                dict(path='gym_extensions.continuous.modified_arm:StrikerMovingStartStateEnv',
+                     max_episode_steps=100,
+                     reward_threshold=0.0,
+                     kwargs= dict()),
+
+            # modified gravity - Hopper
             "HopperGravityHalf-v0" :
                 dict(path='gym_extensions.continuous.modified_hopper:HopperGravityEnv',
                      max_episode_steps=1000,
