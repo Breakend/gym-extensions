@@ -37,8 +37,3 @@ The standard Mujoco OpenAI gym hopper task, but with 1.25 the gravity
 
 The standard Mujoco OpenAI gym hopper task but with a wall place randomly in the path
 
-### Creating a new Mujoco task
-
-Currently, the easiest way to make a new Mujoco gym task is to create a modified version of the standard gym xml and put it in gym_extensions/continuous/mujoco_xmls, then add a registration for the env as in gym_extensions.register_envs.
-
-This is a bit hacky right now, so we're working on a way to extend the gym envs more easily in a programmatic fashion without explicitly  keeping all the XML files. If you have an idea, submit a pull request or an issue!
