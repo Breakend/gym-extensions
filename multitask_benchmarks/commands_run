@@ -1,3 +1,7 @@
 python multitask_benchmarks/run_trpo.py HopperGravityHalf-v0 HopperGravityThreeQuarters-v0 Hopper-v1 HopperGravityOneAndQuarter-v0 HopperGravityOneAndHalf-v0 --num_epochs 500 --batch_size 25000 --text_log_file ./data/hopper_gravity.log --tabular_log_file ./data/hopper_gravity_progress.csv &> debug_log_hopper.log &
 
 python multitask_benchmarks/run_trpo.py HalfCheetahGravityHalf-v0 HalfCheetahGravityThreeQuarters-v0 HalfCheetah-v1 HalfCheetahGravityOneAndQuarter-v0 HalfCheetahGravityOneAndHalf-v0 --num_epochs 500 --batch_size 25000 --text_log_file ./data/hc_gravity.log --tabular_log_file ./data/hc_gravity_progress.csv &> debug_log_hc.log &
+
+nohup python multitask_benchmarks/run_trpo.py Walker2dWithSensor-v0 Walker2dWall-v0 --num_epochs 500 --batch_size 25000 --text_log_file ./walker2d_transfer.log --tabular_log_file ./walker2d_transfer.csv &
+
+nohup python multitask_benchmarks/run_trpo.py HopperWithSensor-v0 HopperWall-v0 --num_epochs 500 --batch_size 25000 --text_log_file ./hopper_transfer.log --tabular_log_file ./hopper_transfer.csv &
