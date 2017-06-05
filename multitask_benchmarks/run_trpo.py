@@ -33,7 +33,7 @@ args = parser.parse_args()
 
 # stub(globals())
 
-ext.set_seed(1)
+# ext.set_seed(1)
 logger.add_text_output(args.text_log_file)
 logger.add_tabular_output(args.tabular_log_file)
 logger.set_log_tabular_only(False)

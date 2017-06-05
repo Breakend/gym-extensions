@@ -4,6 +4,8 @@ from gym.envs.mujoco import mujoco_env
 import os.path as osp
 from gym_extensions.continuous.wall_envs import WallEnvFactory
 from gym_extensions.continuous.gravity_envs import GravityEnvFactory
+from gym_extensions.continuous.perturbed_bodypart_env import ModifiedSizeEnvFactory
+
 from gym.envs.mujoco.hopper import HopperEnv
 
 import os
@@ -12,6 +14,8 @@ import gym
 HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
 
 HopperGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", *args, **kwargs)
+
+HopperModifiedBodyPartSizeEnv = lambda *args, **kwargs : ModifiedSizeEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", *args, **kwargs)
 
 
 class ModifiedHopperEnv(HopperEnv, utils.EzPickle):
