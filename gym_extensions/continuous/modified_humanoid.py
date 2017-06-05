@@ -78,11 +78,11 @@ class HumanoidStandupAndRunEnv(HumanoidEnv, utils.EzPickle):
     def _step(self, a):
         pos_before = mass_center(self.model)
         self.do_simulation(a, self.frame_skip)
-        pos_after = self.model.data.qpos
+        pos_after = mass_center(self.model)
 
-        pos_after_standup = pos_after[2][0]
+        pos_after_standup =  self.model.data.qpos[2][0]
 
-        down = bool((pos_after[2] < 1.0) or (pos_after[2] > 2.0))
+        down = bool(( self.model.data.qpos[2] < 1.0) or ( self.model.data.qpos[2] > 2.0))
 
         alive_bonus = 5.0 if not down else 1.0
 
@@ -94,6 +94,7 @@ class HumanoidStandupAndRunEnv(HumanoidEnv, utils.EzPickle):
         quad_ctrl_cost = 0.1 * np.square(data.ctrl).sum()
         quad_impact_cost = .5e-6 * np.square(data.cfrc_ext).sum()
         quad_impact_cost = min(quad_impact_cost, 10)
+
         reward = lin_vel_cost + uph_cost - quad_ctrl_cost - quad_impact_cost + alive_bonus
         qpos = self.model.data.qpos
 
