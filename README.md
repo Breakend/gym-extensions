@@ -1,4 +1,4 @@
-<img src="https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwi4ouDFxanUAhWDx4MKHWhfAngQjRwIBw&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFile%3AMcGill_Wordmark.svg&psig=AFQjCNFIbytZDw0-wn-np97-oEoY35EYJw&ust=1496849629646520" width=25% align="right" />
+<img src="assets/mcgill.png" width=25% align="right" />
 
 
 # gym-extensions(-multitask)
