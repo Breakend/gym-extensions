@@ -1,4 +1,4 @@
-<img src="assets/mcgill.png" width=25% align="right" />
+<img src="assets/Mcgill.png" width=25% align="right" />
 
 
 # gym-extensions(-multitask)
