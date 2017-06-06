@@ -1,7 +1,7 @@
 <img src="assets/Mcgill.png" width=25% align="right" />
 
 
-# gym-extensions(-multitask)
+# gym-extensions
 This repo is intended as an extension for OpenAI gym for multitask domains, particularly focusing on continuous domains such as MuJoCo tasks.
 
 
