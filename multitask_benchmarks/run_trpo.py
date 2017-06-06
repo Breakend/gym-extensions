@@ -10,7 +10,6 @@ from rllab.misc import ext
 from sandbox.rocky.tf.optimizers.conjugate_gradient_optimizer import ConjugateGradientOptimizer
 from sandbox.rocky.tf.optimizers.conjugate_gradient_optimizer import FiniteDifferenceHvp
 import rllab.misc.logger as logger
-11
 import gym_extensions
 import pickle
 import os.path as osp
@@ -85,7 +84,7 @@ with tf.Session() as sess:
     for env_name, env in envs:
         rollouts = []
         for i in range(args.num_final_rollouts):
-            rollout = rollout_policy(policy, env, max_path_length=env.horizon, speedup=1, get_image_observations=False, animated=False)
+            rollout = rollout_policy(policy, env, max_path_length=env.horizon, speedup=1, get_image_observations=True, animated=True)
             rollouts.append(rollout)
             total_rollouts.append(rollout)
 

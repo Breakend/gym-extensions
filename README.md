@@ -1,13 +1,28 @@
+<img src="https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwi4ouDFxanUAhWDx4MKHWhfAngQjRwIBw&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFile%3AMcGill_Wordmark.svg&psig=AFQjCNFIbytZDw0-wn-np97-oEoY35EYJw&ust=1496849629646520" width=25% align="right" />
+
+
 # gym-extensions(-multitask)
 This repo is intended as an extension for OpenAI gym for multitask domains, particularly focusing on continuous domains such as MuJoCo tasks.
+
+
+## Install
+
+Currently we are working on a pip install process to make this easier, but for now you can simply do
+
+```bash
+git clone https://github.com/Breakend/gym-extensions-multitask.git
+export PYTHONPATH="${PYTHONPATH}:./gym-extensions-multitask"
+python
+>>> import gym_extensions
+```
 
 ## Discrete Envs
 
 We are adding support for discrete envs that are customizable for simple transfer learning tasks. An example is:
 
-<pre>
+```python
 gym_extensions.discrete.classic.cartpole.register_custom_cartpole("CartpoleLongPole-v0", gravity=9.8, masscart=1.0, masspole=0.1, pole_length=1.0, force_mag=10.0)
-</pre>
+```
 
 Which you can then make with, gym.make("CartpoleLongPole-v0").
 
