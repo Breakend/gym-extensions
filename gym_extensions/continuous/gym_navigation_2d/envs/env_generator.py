@@ -44,7 +44,17 @@ class EnvironmentGenerator(object):
         widths = stats.uniform.rvs(wmin, dw, ((centers.shape[0], 1)) )
         heights = stats.uniform.rvs(hmin, dh, ((centers.shape[0], 1)) )
 
-        return centers, widths, heights
+        # Only keep obstacels that are fully within allowed range
+        # This is so that pixel occupancy queries are the same as
+        # continuous distance queries, if they are ever used
+        x_within_bounds = centers[:, 0] + widths[:, 0]/2.0 <= x_range[1]
+        x_within_bounds = x_within_bounds * (centers[:, 0] - widths[:, 0]/2.0 >= x_range[0])
+
+        y_within_bounds = centers[:, 1] + heights[:, 0]/2.0 <= y_range[1]
+        y_within_bounds = y_within_bounds * (centers[:, 1] - heights[:, 0]/2.0 >= y_range[0])
+
+        valid_idx = x_within_bounds * y_within_bounds
+        return centers[valid_idx, :], widths[valid_idx, :], heights[valid_idx, :]
 
     def merge_rectangles_into_obstacles(self, centers, widths, heights, epsilon):
         """Merges rectangles defined by centers, widths, heights. Two rectangles
@@ -95,16 +105,23 @@ class EnvironmentCollection(object):
             print('Sampling environment', i)
             centers, widths, heights = eg.sample_axis_aligned_rectangles(density)
             obstacles = eg.merge_rectangles_into_obstacles(centers, widths, heights, epsilon=0.2)
-            self.map_collection[i] = Environment(self.x_range, self.y_range, obstacles)
+            self.map_collection[i] = Environment(self.x_range, self.y_range, list(obstacles.values()))
 
     def read(self, pkl_filename):
         file_object = open(pkl_filename, 'rb')
-        self.map_collection = pickle.load(file_object)
+        self.x_range, self.y_range, worlds_without_classes = pickle.load(file_object, encoding='bytes')
+        self.map_collection = {idx: Environment(val[0], val[1], [Obstacle(c,w,h) for c,w,h in val[2]]) for idx, val in worlds_without_classes.items()}
         file_object.close()
 
     def save(self, pkl_filename):
         file_object = open(pkl_filename, 'wb')
-        pickle.dump(self.map_collection, file_object)
+        worlds_without_classes = { idx : (world.x_range,
+                                          world.y_range,
+                                        [(obs.rectangle_centers, obs.rectangle_widths, obs.rectangle_heights)  for obs in world.obstacles])
+
+                                   for idx, world in self.map_collection.items()}
+
+        pickle.dump((self.x_range, self.y_range, worlds_without_classes), file_object)
         file_object.close()
 
 
@@ -121,8 +138,7 @@ if __name__ == "__main__":
     height_range=[10,50]
 
     density = 0.0003
-    num_environments = args.num_environments
 
     ec = EnvironmentCollection()
-    ec.generate_random(x_range, y_range, width_range, height_range, density, num_environments)
+    ec.generate_random(x_range, y_range, width_range, height_range, density, args.num_environments)
     ec.save(args.filepath_to_save)

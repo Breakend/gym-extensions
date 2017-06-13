@@ -4,6 +4,7 @@ import gym_extensions
 import sys
 from roboschool.gym_mujoco_xml_env import RoboschoolMujocoXmlEnv
 from gym.envs.mujoco.mujoco_env import MujocoEnv
+
 # From https://raw.githubusercontent.com/openai/roboschool/master/roboschool/test_manual.py
 
 #
