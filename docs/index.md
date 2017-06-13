@@ -13,4 +13,4 @@ See [here](envs) for our environment specifications and descriptions.
 
 ### Brought to you by
 
-![mcgill-logo](https://github.com/Breakend/gym-extensions/raw/master/assets/Mcgill.png){:class="img-responsive" width="40%"}
+![mcgill-logo](https://github.com/Breakend/gym-extensions/raw/master/assets/Mcgill.png){:width="30%" class="img-responsive"}
