@@ -5,3 +5,7 @@ Welcome to **gym-extensions**! We're building on top of <a href="https://github.
 + Multitask, Transfer, and LifeLong Learning Benchmarks
 + Learning to navigate and search tasks
 + More hardcore robotics tasks using ROS and Gazebo simulation
+
+See [here](envs) for our environment specifications and descriptions.
+
+![mcgill-logo](https://github.com/Breakend/gym-extensions/raw/master/assets/Mcgill.png){:class="img-responsive"}
