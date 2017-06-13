@@ -8,4 +8,8 @@ Welcome to **gym-extensions**! We're building on top of <a href="https://github.
 
 See [here](envs) for our environment specifications and descriptions.
 
-![mcgill-logo](https://github.com/Breakend/gym-extensions/raw/master/assets/Mcgill.png){:class="img-responsive"}
+
+
+
+
+![mcgill-logo](https://github.com/Breakend/gym-extensions/raw/master/assets/Mcgill.png){:class="img-responsive" width="40%"}
