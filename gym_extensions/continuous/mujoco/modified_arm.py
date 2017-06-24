@@ -2,7 +2,6 @@ import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
 import os.path as osp
-from rllab.core.serializable import Serializable
 from gym_extensions.continuous.mujoco.gravity_envs import GravityEnvFactory
 from gym.envs.mujoco.pusher import PusherEnv
 from gym.envs.mujoco.striker import StrikerEnv
