@@ -17,6 +17,8 @@ We want all the envs and pull requests we can get! Open an issue if you're confu
 In progress documention:
 
 + A website for benchmarked multitask runs
++ Pix and videos
++ A nicer layout
 + How to create new envs and contribute
 
 ### Brought to you by
