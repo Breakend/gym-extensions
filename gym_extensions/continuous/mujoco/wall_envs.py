@@ -10,8 +10,9 @@ import random
 import os
 from gym import utils
 from gym.envs.mujoco import mujoco_env
-from pyrr.utils import all_parameters_as_numpy_arrays
+
 import pyrr
+from pyrr.utils import all_parameters_as_numpy_arrays
 import math
 import six
 

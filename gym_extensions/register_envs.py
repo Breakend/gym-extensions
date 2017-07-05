@@ -328,7 +328,17 @@ custom_envs = {
             "HumanoidBigHand-v0" :
                 dict(path='gym_extensions.continuous.mujoco.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
                      max_episode_steps=1000,
-                     kwargs= dict(body_parts=["left_hand", "right_hand"], size_scale=1.25))
+                     kwargs= dict(body_parts=["left_hand", "right_hand"], size_scale=1.25)),
+
+            # Contextual environments
+            "CartPoleContextual-v0":
+                dict(path='gym_extensions.discrete.classic.cartpole_contextual:CartPoleContextualEnv',
+                     max_episode_steps=500,
+                     kwargs= dict()),
+            "PendulumContextual-v0":
+                dict(path='gym_extensions.discrete.classic.pendulum_contextual:PendulumContextualEnv',
+                     max_episode_steps=500,
+                     kwargs= dict())
                      }
 
 def register_custom_envs():
