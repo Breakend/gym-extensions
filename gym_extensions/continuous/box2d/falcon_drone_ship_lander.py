@@ -20,7 +20,7 @@ __maintainer__ = "Victor Barbaros"
 __github_username__ = "vBarbaros"
 
 FPS    = 60
-SCALE  = 30.0   # affects how fast-paced the game is, forces should be adjusted as well
+SCALE  = 30.0   #default:30 affects how fast-paced the game is, forces should be adjusted as well
 
 MAIN_ENGINE_POWER  = 100.0 # 13.0
 SIDE_ENGINE_POWER  =  3.0 # 0.6
@@ -28,9 +28,10 @@ SIDE_ENGINE_POWER  =  3.0 # 0.6
 INITIAL_RANDOM = 500 #300.0   # Set 1500 to make game harder
 
 FALCON_POLY =[
-    (-14,+37), (-17,0), (-17,-30),
-    (+17,-30), (+17,0), (+14,+37)
+    (-5,+50), (-17,35),(-17,0), (-17,-30),
+    (+17,-30),(+17,0),(+17,+35), (+5,+50)
     ]
+    
 
 LEG_AWAY = 12 #20
 LEG_DOWN = 30 # 18
@@ -348,9 +349,9 @@ class FalconLander(gym.Env):
         if self.prev_shaping is not None:
             reward = shaping - self.prev_shaping
         self.prev_shaping = shaping
-
-        reward -= m_power*0.10  # In the floating ship version, the penalty should be smaller
-        reward -= s_power*0.01
+        
+        reward -= m_power*0.25  # In the floating ship version, the penalty should be smaller
+        reward -= s_power*0.05
 
         done = False
 
@@ -358,10 +359,14 @@ class FalconLander(gym.Env):
         if self.game_over or state[1] < DRONE_LEVEL:
             done   = True
             reward = -150
-        if not self.falcon_rocket.awake:
+
+        if not self.falcon_rocket.awake and (state[6] == 1 and state[7] == 1):
             done   = True
             reward = +150
-        
+        elif not self.falcon_rocket.awake and (state[6] != 1 and state[7] != 1):
+            done   = True
+            reward = -150
+
         return np.array(state), reward, done, {}
 
 

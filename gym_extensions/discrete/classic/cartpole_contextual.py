@@ -46,15 +46,14 @@ class CartPoleContextualEnv(CartPoleEnv):
         self.force_mag = self.context[3]
         
         # our own responsibility to define the range of the context, since we define it
-        context_high = np.array([
+        self.context_high = np.array([
             self.masscart  * 2,
             self.masspole  * 10,
             self.length    * 2,
             self.force_mag * 2])
-        
-        context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) # the params in the context can't be less or equal to zero!
 
-        self.context_space = spaces.Box(context_low, context_high)
+        # the params in the given context can't be less or equal to zero!
+        self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) 
 
 
     def _step(self, action):
@@ -68,3 +67,30 @@ class CartPoleContextualEnv(CartPoleEnv):
         self.masspole  = self.context[1]
         self.length    = self.context[2]
         self.force_mag = self.context[3]
+
+    def context_space_info(self):
+        cont_info_dict = {}
+
+        cont_info_dict['context_vals'] = {
+                                        'masscart':self.masscart, 
+                                        'masspole':self.masspole, 
+                                        'pole_length':self.length, 
+                                        'force_magnitude':self.force_mag
+                                        }
+
+        cont_info_dict['context_high'] = self.context_high
+        cont_info_dict['context_low' ] = self.context_low
+        cont_info_dict['state_dims'  ] = len(self.state)
+
+        # yes, I don't care that there are two/three different actions here; for the contextual setup
+        # I need to know what the size of the action vector I need to pass to the transition function
+        cont_info_dict['action_dims' ] = 1
+        cont_info_dict['state_high'  ] = self.observation_space.high
+        cont_info_dict['state_low'   ] = self.observation_space.low
+
+        return cont_info_dict
+
+
+
+
+
