@@ -11,6 +11,7 @@ There's a lot of info to go over!
 + You can find info about the modified Mujoco OpenAI continuous domain tasks [here](mujoco_gym_envs)
 + You can find info about new 2D navigation continuous domain tasks [here](2d_navigation_envs)
 + We also provide a set of wrappers to process observations in envs as described [here](wrappers)
++ Finally, you can enjoy a Brand New SpaceX-like Falcon rocket that can be thought to land on the autonomous drone ship [here](falcon_rocket)
 
 We want all the envs and pull requests we can get! Open an issue if you're confused and we'll fix it ASAP.
 

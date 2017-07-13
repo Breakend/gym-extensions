@@ -46,27 +46,22 @@ class PendulumContextualEnv(PendulumEnv):
 
 
     def change_context(self, context_vector):
-        self.context    = context_vector
-        self.max_speed  = self.context[0]
-        self.max_torque = self.context[1]
+        self.max_speed  = context_vector
 
 
     def context_space_info(self):
         context_info_dict = {}
 
-        context_info_dict['context_vals'] = {
-                                            'max_speed':self.max_speed, 
-                                            'max_torque':self.max_torque
-                                            }
-
-        context_info_dict['context_high'] = self.context_high
-        context_info_dict['context_low' ] = self.context_low
-        context_info_dict['state_dims'  ] = len(self.state)
-        
-        # yes, I don't care that there are two/three different actions here; for the contextual setup
+        context_info_dict['context_vals'] = [8.0, 2.0]
+        context_info_dict['context_high'] = self.context_high.tolist()
+        context_info_dict['context_low' ] = self.context_low.tolist()
+        context_info_dict['state_dims'  ] = 3
         # I need to know what the size of the action vector I need to pass to the transition function
         context_info_dict['action_dims' ] = 1
-        context_info_dict['state_high'  ] = self.observation_space.high
-        context_info_dict['state_low'   ] = self.observation_space.low
+        context_info_dict['action_space'] = 'continuous'
+        context_info_dict['state_high'  ] = self.observation_space.high.tolist()
+        context_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        context_info_dict['action_high' ] = self.action_space.high.tolist()
+        context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
         return context_info_dict

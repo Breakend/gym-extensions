@@ -25,21 +25,20 @@ SCALE  = 30.0   #default:30 affects how fast-paced the game is, forces should be
 MAIN_ENGINE_POWER  = 100.0 # 13.0
 SIDE_ENGINE_POWER  =  3.0 # 0.6
 
-INITIAL_RANDOM = 500 #300.0   # Set 1500 to make game harder
-
+INITIAL_RANDOM = 500 # Set 1500 to make game harder
+   
 FALCON_POLY =[
-    (-5,+50), (-17,35),(-17,0), (-17,-30),
-    (+17,-30),(+17,0),(+17,+35), (+5,+50)
-    ]
-    
+    (-4,+150), (-13,135),(-13,0), (-13,-30),
+    (+13,-30),(+13,0),(+13,+135), (+4,+150)
+]
 
 LEG_AWAY = 12 #20
 LEG_DOWN = 30 # 18
 LEG_W, LEG_H = 3, 10
 LEG_SPRING_TORQUE = 40
 
-SIDE_ENGINE_HEIGHT = 14.0
-SIDE_ENGINE_AWAY   = 12.0
+SIDE_ENGINE_HEIGHT = 130.0 #14
+SIDE_ENGINE_AWAY   = 15.0 #12
 
 DRONE_SHIP_H = 0.25
 DRONE_SHIP_W = 2.5
@@ -48,8 +47,8 @@ GOING_LEFT = False
 CONST_FORCE_DRONE_SHIP = 0.75
 FREQUENCY_FACTOR = 250
 
-VIEWPORT_W = 1400
-VIEWPORT_H = 800
+VIEWPORT_W = 1450
+VIEWPORT_H = 820
 
 
 class ContactDetector(contactListener):
@@ -90,7 +89,7 @@ class FalconLander(gym.Env):
 
         high = np.array([np.inf]*8)  # useful range is -1 .. +1, but spikes can be higher
         self.observation_space = spaces.Box(-high, high)
-        # Check the action space and define appropriately in the new heuristic funciton
+
         if self.continuous:
             # Action is two floats [main engine, left-right engines].
             # Main engine: -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power.
@@ -156,7 +155,7 @@ class FalconLander(gym.Env):
             fixtures = f)
         
         self.floating_drone_ship.color1 = (0.1,0.1,0.1)
-        self.floating_drone_ship.color2 = (0.2,0.2,0.2)
+        self.floating_drone_ship.color2 = (0,0,0)
 
         self.sea_surface.color1 = (0.5,0.4,0.9)
         self.sea_surface.color2 = (0.3,0.3,0.5)
@@ -175,8 +174,8 @@ class FalconLander(gym.Env):
                 maskBits=0x0020,  # collide only with floating_drone_ship
                 restitution=0.0) #, userData=self.logo_img) # 0.99 bouncy
                 )
-        self.falcon_rocket.color1 = (0.7,0.7,0.7)
-        self.falcon_rocket.color2 = (0.2,0.2,0.2)
+        self.falcon_rocket.color1 = (1.0,1.0,1.0)
+        self.falcon_rocket.color2 = (0,0,0)
 
         self.falcon_rocket.ApplyForceToCenter( (
             self.np_random.uniform(-INITIAL_RANDOM, INITIAL_RANDOM),
@@ -197,8 +196,8 @@ class FalconLander(gym.Env):
                     maskBits=0x0020)
                 )
             leg.ground_contact = False
-            leg.color1 = (0.5,0.4,0.9)
-            leg.color2 = (0.3,0.3,0.5)
+            leg.color1 = (0,0,0)
+            leg.color2 = (0,0,0)
             rjd = revoluteJointDef(
                 bodyA=self.falcon_rocket,
                 bodyB=leg,
@@ -247,6 +246,9 @@ class FalconLander(gym.Env):
 
     
     def control_floating_platform(self):
+        '''It's controlled autonomously so the learner has no direct access
+        '''
+
         global GOING_LEFT
         fx = 1
         fy = 0
@@ -327,7 +329,6 @@ class FalconLander(gym.Env):
             20.0*self.falcon_rocket.angularVelocity,
             1.0 if (self.legs[0].ground_contact and self.legs[1].ground_contact) else 0.0,
             1.0 if (self.legs[0].ground_contact and self.legs[1].ground_contact) else 0.0,
-            # add the (x and dx of the floating drone ship)
             (pos_floating_drone_ship.x - VIEWPORT_W/SCALE/2) / (VIEWPORT_W/SCALE/2),
             pos_floating_drone_ship.y / (VIEWPORT_H/SCALE/2),
             vel_floating_drone_ship.x*(VIEWPORT_W/SCALE/2)/FPS,
@@ -343,14 +344,14 @@ class FalconLander(gym.Env):
             - 100*np.sqrt( (state[0] - state[8])**2 + (state[1] - state[9])**2) \
             - 100*np.sqrt(state[2]*state[2] + state[3]*state[3]) \
             - 100*abs(state[4]) + 10*state[6] + 10*state[7] \
-            - 100*abs(state[8]) - 100*abs(state[10]) - 100*abs(state[8]) 
-        # in the last line above: higher values of x, dx and angle of drone ship => higher reward
+            - 10*abs(state[8]) - 10*abs(state[10]) - 10*abs(state[11]) 
+        # in the last line above: lower values of x, dx and angle of drone ship => higher reward
 
         if self.prev_shaping is not None:
             reward = shaping - self.prev_shaping
         self.prev_shaping = shaping
         
-        reward -= m_power*0.25  # In the floating ship version, the penalty should be smaller
+        reward -= m_power*0.15  # In the floating ship version, the penalty should be smaller
         reward -= s_power*0.05
 
         done = False
@@ -363,9 +364,10 @@ class FalconLander(gym.Env):
         if not self.falcon_rocket.awake and (state[6] == 1 and state[7] == 1):
             done   = True
             reward = +150
-        elif not self.falcon_rocket.awake and (state[6] != 1 and state[7] != 1):
+            
+        elif not self.falcon_rocket.awake and (state[6] != 1 and state[7] != 1):#if not landed on both legs, penalize
             done   = True
-            reward = -150
+            reward = -250
 
         return np.array(state), reward, done, {}
 
@@ -471,6 +473,7 @@ def key_control(env, s):
             action_done = True
                         
     return np.array(action)
+
 
 if __name__=="__main__":
     #env = FalconLander()

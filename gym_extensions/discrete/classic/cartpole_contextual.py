@@ -40,7 +40,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         super(CartPoleContextualEnv, self).__init__()
         self.context   = [masscart, masspole, length, force_mag]
         self.gravity   = gravity # not including in the context for now
-        self.masscart  = self.context[0]
+        #self.masscart  = self.context[0]
         self.masspole  = self.context[1]
         self.length    = self.context[2]
         self.force_mag = self.context[3]
@@ -60,35 +60,27 @@ class CartPoleContextualEnv(CartPoleEnv):
         state, reward, done, _  = super(CartPoleContextualEnv, self)._step(action)
         return state, reward, done, {'masscart':self.masscart, 'masspole':self.masspole, 'pole_length':self.length, 'force_magnitude':self.force_mag}
 
-
+      
     def change_context(self, context_vector):
-        self.context = context_vector
-        self.masscart  = self.context[0]
-        self.masspole  = self.context[1]
-        self.length    = self.context[2]
-        self.force_mag = self.context[3]
+        self.masscart = context_vector
 
+        
     def context_space_info(self):
-        cont_info_dict = {}
+        context_info_dict = {}
 
-        cont_info_dict['context_vals'] = {
-                                        'masscart':self.masscart, 
-                                        'masspole':self.masspole, 
-                                        'pole_length':self.length, 
-                                        'force_magnitude':self.force_mag
-                                        }
+        context_info_dict['context_vals'] = [1.0, 0.1, 0.5, 10.0]
+        context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
+        context_info_dict['context_low' ] = self.context_low.tolist()
+        context_info_dict['state_dims'  ] = 4
+        context_info_dict['action_dims' ] = 1
+        context_info_dict['action_space'] = 'discrete'
+        context_info_dict['state_high'  ] = self.observation_space.high.tolist()
+        context_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        context_info_dict['action_high' ] = 1
+        context_info_dict['action_low'  ] = 0
 
-        cont_info_dict['context_high'] = self.context_high
-        cont_info_dict['context_low' ] = self.context_low
-        cont_info_dict['state_dims'  ] = len(self.state)
+        return context_info_dict
 
-        # yes, I don't care that there are two/three different actions here; for the contextual setup
-        # I need to know what the size of the action vector I need to pass to the transition function
-        cont_info_dict['action_dims' ] = 1
-        cont_info_dict['state_high'  ] = self.observation_space.high
-        cont_info_dict['state_low'   ] = self.observation_space.low
-
-        return cont_info_dict
 
 
 
