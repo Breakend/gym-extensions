@@ -29,7 +29,7 @@ For contributing environments please use the general directory structure we have
 
 Here's a list of contributors!
 
-+ @Breakend
-+ @weidi-chang
-+ @florianshkurti
-+ @vBarbaros
++ <a href="https://github.com/Breakend">@Breakend</a>
++ <a href="https://github.com/weidi-chang">@weidi-chang</a>
++ <a href="https://github.com/florianshkurti">@florianshkurti</a>
++ <a href="https://github.com/vBarbaros">@vBarbaros</a>
