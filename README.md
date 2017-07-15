@@ -6,12 +6,11 @@ This repo is intended as an extension for OpenAI Gym for auxiliary tasks (multit
 
 ## Install
 
-Currently we are working on a pip install process to make this easier, but for now you can simply do
+Currently we are working on a pip install process to make this easier, but for now you can simply do:
 
 ```bash
 git clone https://github.com/Breakend/gym-extensions-multitask.git
-export PYTHONPATH="${PYTHONPATH}:./gym-extensions-multitask"
-python
+pip3 install -e .
 >>> import gym_extensions
 ```
 
