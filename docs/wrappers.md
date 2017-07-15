@@ -21,7 +21,7 @@ We only provide one wrapper for now:
 ### Example Usage
 
 ```python
-gymenv = GymEnv("Hopper-v1", force_reset=True)
+gymenv = gym.make("Hopper-v1")
 transformers = [SimpleNormalizePixelIntensitiesTransformer(), ResizeImageTransformer(fraction_of_current_size=.35)]
 transformed_env = ObservationTransformWrapper(gymenv, transformers)
 ```

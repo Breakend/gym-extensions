@@ -9,7 +9,17 @@ custom_envs = {
                      max_episode_steps=100,
                      reward_threshold=0.0,
                      kwargs= dict()),
-
+            # Pusher modifications
+            "PusherLeftSide-v0":
+                dict(path='gym_extensions.continuous.mujoco.modified_arm:PusherLeftSide',
+                     max_episode_steps=100,
+                     reward_threshold=0.0,
+                     kwargs= dict()),
+            "PusherFullRange-v0":
+                dict(path='gym_extensions.continuous.mujoco.modified_arm:PusherFullRange',
+                     max_episode_steps=100,
+                     reward_threshold=0.0,
+                     kwargs= dict()),
             # Striker
             "StrikerMovingStart-v0":
                 dict(path='gym_extensions.continuous.mujoco.modified_arm:StrikerMovingStartStateEnv',

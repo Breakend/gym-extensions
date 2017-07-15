@@ -1,11 +1,10 @@
-
-from rllab.misc.overrides import overrides
-from scipy.misc import imresize
-from rllab.spaces.box import Box
-from cached_property import cached_property
-import scipy.misc
 import numpy as np
-from rllab.misc.overrides import overrides
+import scipy.misc
+from gym.spaces.box import Box
+from scipy.misc import imresize
+
+from cached_property import cached_property
+
 
 # TODO: move this to folder with different files
 
@@ -24,17 +23,53 @@ class BaseTransformer(object):
         """
         prev_observation_space and how it is modified
         """
-        raise prev_observation_space
+        return prev_observation_space
+
+    def reset(self):
+        """
+        resets the transformer if there is an operation to be made
+        """
+        return
+
+class AppendPrevTimeStepTransformer(BaseTransformer):
+    """
+    Keeps track of and appends the previous observation timestep.
+    """
+    def __init__(self):
+        self.prev_timestep = None
+
+    def transform(self, observation):
+        if self.prev_timestep is None:
+            self.prev_timestep = np.zeros(observation.shape)
+
+        new_obs = np.concatenate([observation.reshape((1, -1)), self.prev_timestep.reshape((1, -1))], axis=1).reshape(-1)
+
+        self.prev_timestep = observation
+        return new_obs
+
+    def transformed_observation_space(self, prev_observation_space):
+        if type(prev_observation_space) is Box:
+            #TODO: should use tile?
+            copy = np.copy(prev_observation_space.low.reshape((1, -1)))
+            low = np.concatenate([copy, copy], axis=1)
+            copy = np.copy(prev_observation_space.high.reshape((1, -1)))
+            high = np.concatenate([copy, copy], axis=1)
+            return Box(low.reshape(-1), high.reshape(-1))
+        else:
+            raise NotImplementedError("Currently only support Box observation spaces for ResizeImageTransformer")
+
+        return prev_observation_space
+
+    def reset(self):
+        self.prev_timestep = None
 
 class SimpleNormalizePixelIntensitiesTransformer(BaseTransformer):
     """
     Normalizes pixel intensities simply by dividing by 255.
     """
-    @overrides
     def transform(self, observation):
         return np.array(observation).astype(np.float32) / 255.0
 
-    @overrides
     def transformed_observation_space(self, wrapped_observation_space):
         return wrapped_observation_space
 
@@ -46,11 +81,9 @@ class ResizeImageTransformer(BaseTransformer):
     def __init__(self, fraction_of_current_size):
         self.fraction_of_current_size = fraction_of_current_size
 
-    @overrides
     def transform(self, observation):
         return scipy.misc.imresize(observation, self.fraction_of_current_size)
 
-    @overrides
     def transformed_observation_space(self, wrapped_observation_space):
         if type(wrapped_observation_space) is Box:
             return Box(scipy.misc.imresize(wrapped_observation_space.low, self.fraction_of_current_size), scipy.misc.imresize(wrapped_observation_space.high, self.fraction_of_current_size))
@@ -75,6 +108,5 @@ class RandomSensorMaskTransformer(BaseTransformer):
         obs[sensor_idx] = 0
         return obs
 
-    @overrides
     def transform(self, observation):
         return self.occlude(observation)
