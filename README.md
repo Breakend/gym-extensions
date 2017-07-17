@@ -14,6 +14,15 @@ pip3 install -e .
 >>> import gym_extensions
 ```
 
+### Possible Issues
+
+Due to the dependency on OpenAI gym you may have some trouble when installing gym on MAC, to remedy:
+
+```bash
+# as per: https://github.com/openai/gym/issues/164
+export MACOSX_DEPLOYMENT_TARGET=10.12; pip install -e .
+```
+
 ## More info
 
 More information will be provided on our doc website: https://breakend.github.io/gym-extensions/
