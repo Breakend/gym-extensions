@@ -9,4 +9,4 @@ gym_extensions.discrete.classic.cartpole.register_custom_cartpole("CartpoleLongP
 
 Which you can then make with, gym.make("CartpoleLongPole-v0").
 
-While we want to support these custom envs, the main goal is to come up with a standard set of added tasks which can be used for contexts like MultiTask or LifeLong learning, particularly in Continuous domains. To that extent, we come up with the following.
+While we want to support these custom envs, the main goal of this project is to come up with a standard set of added tasks which can be used for in the contexts of MultiTask or LifeLong learning, particularly in Continuous domains. To that extent, we come up with the following.
