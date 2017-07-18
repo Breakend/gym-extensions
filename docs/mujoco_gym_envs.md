@@ -67,7 +67,7 @@ This task rewards standing up and running. Combines the reward functions from Hu
 
 Inspired by the wall jumping experiment in (Finn et al., 2016), we build a set of similar environments by extending the OpenAI running tasks to use a multi-beam noiseless range sensor.
 
-Ray-beams are emitted from the torso of the runner to act as sensor reading. We also provide the usual running tasks with no walls and the sensor perception enabled so that an agent can first be trained with the larger observation vector before being run or trained on the environments with a wall set in the path of the agent.
+Ray-beams are emitted from the torso of the runner to act as sensor readings. We also provide the usual running tasks with no walls and the sensor perception enabled so that an agent can first be trained with the larger observation vector before being run or trained on the environments with a wall set in the path of the agent.
 
 **Walker2dWithSensor-v0**
 
@@ -75,7 +75,7 @@ This task is identical to the Walker2d environment in OpenAI gym, but with empty
 
 **Walker2dWall-v0**
 
-In this task, the agent is equipped with a noiseless ray tracing 10 beam sensor in an arc of 90 degrees and a maximum sensing distance of 10 meters, with readouts normalized to a range of [0, 1]. Returns distances as normalized numbers from 0-1 such that it is a percentage of the overall maximum ray detection distance. A wall is randomly placed in the path of the agent, at a location drawn from a uniform distribution from 1.8 to 3.8 meters ahead of the agent’s start location.
+In this task, the agent is equipped with a noiseless ray tracing 10 beam sensor in an arc of 90 degrees and a maximum sensing distance of 10 meters, with readouts normalized to a range of [0, 1] to make it a percentage of the overall maximum ray detection distance. A wall is randomly placed in the path of the agent, at a location drawn from a uniform distribution from 1.8 to 3.8 meters ahead of the agent’s start location.
 
 **Similarly:**
 
@@ -91,7 +91,7 @@ In this task, the agent is equipped with a noiseless ray tracing 10 beam sensor 
 + HumanoidStandupAndRunWithSensor-v0
 + HumanoidStandupAndRunWall-v0
 
-### Arm envs
+### Arm Environments
 
 In the OpenAI Striker and Pusher tasks, a 7 DoF arm tries to hit a ball into a hole or push a peg to a goal position respectively. We extend these tasks to randomly move the goal position for the Pusher task, and randomly move the ball start position for the Striker task. As in the original tasks, we bound the varied goal or start state within some restricted uniform distribution as domain appropriate.
 
