@@ -6,7 +6,6 @@
 
 ## Results
 
-<DIV ALIGN="CENTER"><A NAME="277"></A>
 <TABLE>
 <CAPTION><STRONG>Table:</STRONG>
 <SMALL CLASS="SMALL">Average and standard deviation (mean +/- std) of reward across a set of 20 sample rollouts. We show samples immediately after training on a particular environment and the reward obtained by the final trained policy on all previously seen environment. A group of tasks is defined by a bold separator and the total average across all final rollouts is presented. ``Fully Trained'' lists the final evaluation result using the fully trained policy which has seen all the environments. ``After Env Training'' lists the evaluation immediately after training on that specific environment (having seen all the previous environments up until that point in the group). The ``First Step'' column indicates the reward at the first iteration of training on the new environment after having trained on the previous environments in the group. ``Single Env'' indicates rollouts on a policy trained solely on that environment (with all the same training parameters).</SMALL></CAPTION>
@@ -201,12 +200,10 @@ Total for Grouping </SMALL></TD>
 </TR>
 <!-- </TABLE><SMALL CLASS="SCRIPTSIZE"> -->
 
-<A NAME="table:results_gravity"></A></SMALL></TD></TR>
+<!-- <A NAME="table:results_gravity"></A></SMALL></TD></TR> -->
 </TABLE>
-</DIV>
 
 
-<DIV ALIGN="CENTER"><A NAME="283"></A>
 <TABLE>
 <CAPTION><STRONG>Table:</STRONG>
 Results for modified body-part running task groups. Same parameters as described in Table&nbsp;<A HREF="#table:results_gravity"><IMG  ALIGN="BOTTOM" BORDER="1" SRC="crossref.png"></A>. Number of training iterations lowered to 500 per environment due to the larger number of environments.</CAPTION>
@@ -488,11 +485,10 @@ Total for Grouping </SMALL></TD>
 <!-- </TR> -->
 <!-- </TABLE><SMALL CLASS="SCRIPTSIZE"> -->
 
-<A NAME="table:results_body_parts"></A></SMALL></TD></TR>
+<!-- <A NAME="table:results_body_parts"></A></SMALL></TD></TR> -->
 </TABLE>
-</DIV>
 
-<DIV ALIGN="CENTER"><A NAME="180"></A>
+
 <TABLE>
 <CAPTION><STRONG>Table:</STRONG>
 Results for modified running tasks with sensors, walls, or multiple goals.</CAPTION>
@@ -607,13 +603,12 @@ HumanoidStandupAndRunWall-v0 </SMALL></TD>
 <TD ALIGN="CENTER"><SMALL CLASS="SCRIPTSIZE"> 61764.5 +/- 15150.20 </SMALL></TD>
 </TR>
 </TR>
-</TABLE><SMALL CLASS="SCRIPTSIZE">
+<!-- </TABLE><SMALL CLASS="SCRIPTSIZE"> -->
 
-<A NAME="table:results_sensor"></A></SMALL></TD></TR>
+<!-- <A NAME="table:results_sensor"></A></SMALL></TD></TR> -->
 </TABLE>
-</DIV>
 
-<DIV ALIGN="CENTER"><A NAME="294"></A>
+
 <TABLE>
 <CAPTION><STRONG>Table:</STRONG>
 Results for arm-based task groups. Same parameters as described in Table&nbsp;<A HREF="#table:results_gravity"><IMG  ALIGN="BOTTOM" BORDER="1" SRC="crossref.png"></A>.</CAPTION>
@@ -669,8 +664,5 @@ Total for Grouping </SMALL></TD>
 <!-- <TD ALIGN="CENTER"><SMALL CLASS="SCRIPTSIZE"> </SMALL></TD> -->
 </TR>
 
-</TABLE><SMALL CLASS="SCRIPTSIZE">
-
-<A NAME="table:results_arm"></A></SMALL></TD></TR>
 </TABLE>
-</DIV>
+<!-- </DIV> -->
