@@ -14,6 +14,10 @@ class ProxyEnv(Env, Serializable):
         self._wrapped_env = wrapped_env
 
     @property
+    def spec(self):
+        return self._wrapped_env.spec
+
+    @property
     def wrapped_env(self):
         return self._wrapped_env
 
