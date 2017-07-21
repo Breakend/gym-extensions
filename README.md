@@ -1,15 +1,44 @@
 <img src="assets/Mcgill.png" width=25% align="right" />
 
-
 # gym-extensions
 This python package is an extension to OpenAI Gym for auxiliary tasks (multitask learning, transfer learning, inverse reinforcement learning, etc.)
 
-## Install
 
+## Dependencies
+
+- [Python 3.5.2](https://www.python.org/)
+- [OpenAI Gym](https://gym.openai.com/)
+- [MuJoCo](http://mujoco.org/) (Optional)
+- [mujoco-py](https://github.com/openai/mujoco-py#install-mujoco) (Optional)
+- [roboschool](https://github.com/openai/roboschool) (Optional)
+
+## Installation
+
+Check out the latest code:
 ```bash
 git clone https://github.com/Breakend/gym-extensions-multitask.git
+```
+
+### Install without MuJoCo Support
+```bash
 pip3 install -e .
->>> import gym_extensions
+```
+
+### Install with MuJoCo Support
+Install MuJoCo according to [mujoco-py](https://github.com/openai/mujoco-py#install-mujoco).
+1. Obtain license for [MuJoCo](http://mujoco.org/)
+2. Download MuJoCo 1.50 binaries
+3. Unzip into `mjpro150` directory `~/.mujoco/mjproj150` and place license 
+at `~/.mujoco/mjkey.txt`
+4. Finally, install gym-extensions with mujoco-py enabled:
+
+```bash
+pip3 install -e .[mujoco]
+```
+
+### Test Installation
+```
+nosetests -v gym-extensions
 ```
 
 ### Possible Issues

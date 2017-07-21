@@ -67,6 +67,8 @@ docs/_build/
 # PyBuilder
 target/
 
+# swp
+# *.swp
 # Jupyter Notebook
 .ipynb_checkpoints
 

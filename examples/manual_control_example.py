@@ -1,17 +1,26 @@
-import roboschool, gym, gym.spaces, gym.utils, gym.utils.seeding
+import gym
+import gym.spaces
+import gym.utils
+import gym.utils.seeding
 import numpy as np
-import gym_extensions
+from gym_extensions.continuous import mujoco
 import sys
-from roboschool.gym_mujoco_xml_env import RoboschoolMujocoXmlEnv
-from gym.envs.mujoco.mujoco_env import MujocoEnv
+try:
+    from gym.envs.mujoco.mujoco_env import MujocoEnv
+except:
+    print("This example depends on mujoco, see README.md for information on installing.")
+    sys.exit()
+try:
+    import roboschool
+    from roboschool.gym_mujoco_xml_env import RoboschoolMujocoXmlEnv
+except:
+    print("""This example depends on roboschool. To install roboschool, see instructions at: 
+    https://github.com/openai/roboschool""")
+    sys.exit()
 
 # From https://raw.githubusercontent.com/openai/roboschool/master/roboschool/test_manual.py
-
-#
 # Run this file to test environments using manual control:
-#
 # python test_manual.py RoboschoolHopper-v0
-#
 
 class TestKeyboardControl:
     def __init__(self):
@@ -78,7 +87,6 @@ Keyboard shortcuts:
 
 def test(env_id):
     print(usage % sys.argv[0])
-
     env = gym.make(env_id)
     # import pdb; pdb.set_trace()
     env.reset()  # This creates default single player scene

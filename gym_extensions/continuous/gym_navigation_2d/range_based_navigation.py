@@ -9,8 +9,10 @@ from math import pi, cos, sin
 import numpy as np
 
 import os
+import logging 
 
 class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
+    logger = logging.getLogger(__name__)
     metadata = {'render.modes': ['human']}
 
     def __init__(self,
@@ -190,6 +192,7 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
 
 
 class StateBasedMDPNavigation2DEnv(LimitedRangeBasedPOMDPNavigation2DEnv):
+    logger = logging.getLogger(__name__)
     def __init__(self, *args, **kwargs):
         LimitedRangeBasedPOMDPNavigation2DEnv.__init__(self, *args, **kwargs)
         low = [-float('inf'), -float('inf'), 0.0, 0.0]

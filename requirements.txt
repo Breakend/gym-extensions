@@ -1,0 +1,10 @@
+numpy>=1.11
+gym[all]>=0.9.2
+pyrr
+six
+cached_property
+networkx
+scipy
+nose
+pygame
+opencv-python

@@ -1,6 +1,7 @@
 import gym
-from gym_extensions.wrappers.observation_transform_wrapper import *
-from gym_extensions.wrappers.transformers import *
+from gym_extensions.wrappers.observation_transform_wrapper import ObservationTransformWrapper
+from gym_extensions.wrappers.transformers import (SimpleNormalizePixelIntensitiesTransformer, 
+                                                  ResizeImageTransformer, AppendPrevTimeStepTransformer)
 import time
 
 def test_image_resize():

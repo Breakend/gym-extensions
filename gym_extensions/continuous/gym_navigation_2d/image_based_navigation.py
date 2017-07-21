@@ -9,9 +9,10 @@ from .range_based_navigation import StateBasedMDPNavigation2DEnv
 from math import pi, cos, sin
 import numpy as np
 import cv2
-
+import logging 
 
 class ImageBasedNavigation2DEnv(StateBasedMDPNavigation2DEnv):
+    logger = logging.getLogger(__name__)
     metadata = {'render.modes': ['human']}
 
     def __init__(self, *args, **kwargs):

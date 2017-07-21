@@ -1,7 +1,6 @@
 import gym
-import gym_extensions
 
-from gym_extensions.continuous.gym_navigation_2d.envs.env_generator import Environment, EnvironmentCollection, Obstacle
+from gym_extensions.continuous.gym_navigation_2d.env_generator import Environment, EnvironmentCollection, Obstacle
 import numpy as np
 import time
 import timeit
