@@ -33,6 +33,7 @@ class ObservationTransformWrapper(ProxyEnv, Serializable):
         obs = self._wrapped_env.reset()
         for transformer in self.transformers:
             obs = transformer.transform(obs)
+            transformer.reset()
         return obs
 
     def step(self, action):
