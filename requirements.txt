@@ -4,7 +4,8 @@ pyrr
 six
 cached_property
 networkx
-scipy
+scipy>=0.17.0
 nose
 pygame
-opencv-python
+scikit-image
+matplotlib>=1.3.1

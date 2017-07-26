@@ -1,10 +1,10 @@
 import unittest
 import numpy as np
-from .env_generator import *
+from env_generator import EnvironmentCollection, EnvironmentGenerator
+from env_utils import Environment
 from geometry_utils import *
 
 from math import sqrt
-import cv2
 import os
 
 class TestDistanceMethods(unittest.TestCase):

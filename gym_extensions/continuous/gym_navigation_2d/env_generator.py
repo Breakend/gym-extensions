@@ -5,8 +5,8 @@ from scipy import stats
 import numpy as np
 from math import sqrt, asin, cos, sin, atan2
 import networkx as nx
-from gym_extensions.continuous.gym_navigation_2d.env_utils import *
-from gym_extensions.continuous.gym_navigation_2d.geometry_utils import *
+from .env_utils import Obstacle, Environment
+from .geometry_utils import *
 import sys
 import pickle
 

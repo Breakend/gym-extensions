@@ -38,7 +38,7 @@ pip3 install -e .[mujoco]
 
 ### Test Installation
 ```
-nosetests -v gym-extensions
+nosetests -v gym_extensions
 ```
 
 ### Possible Issues

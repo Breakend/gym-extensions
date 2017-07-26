@@ -1,13 +1,14 @@
 import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
-from .env_generator import Environment, EnvironmentCollection
-from gym.envs.classic_control import rendering
 from gym.spaces import Box, Tuple
+from .env_generator import EnvironmentCollection
 
 from math import pi, cos, sin
 import numpy as np
 
+#from gym.envs.classic_control.rendering  import make_circle, Transform
+from gym_extensions.continuous.gym_navigation_2d import gym_rendering  
 import os
 import logging 
 
@@ -111,8 +112,8 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
         return self._get_observation(self.state)
 
     def _plot_state(self, viewer, state):
-        polygon = rendering.make_circle(radius=5, res=30, filled=True)
-        state_tr = rendering.Transform(translation=(state[0], state[1]))
+        polygon = gym_rendering.make_circle(radius=5, res=30, filled=True)
+        state_tr = gym_rendering.Transform(translation=(state[0], state[1]))
         polygon.add_attr(state_tr)
         viewer.add_onetime(polygon)
 
@@ -128,7 +129,7 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
             start = (state[0], state[1])
             end = (state[0] + r*cos(theta), state[1] + r*sin(theta))
 
-            line = rendering.Line(start=start, end=end)
+            line = gym_rendering.Line(start=start, end=end)
             line.set_color(.5, 0.5, 0.5)
             viewer.add_onetime(line)
 
@@ -151,16 +152,16 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
                 t = h/2.0
                 b = -h/2.0
 
-                rectangle = rendering.FilledPolygon([(l,b), (l,t), (r,t), (r,b)])
-                tr = rendering.Transform(translation=(c[0], c[1]))
+                rectangle = gym_rendering.FilledPolygon([(l,b), (l,t), (r,t), (r,b)])
+                tr = gym_rendering.Transform(translation=(c[0], c[1]))
                 rectangle.add_attr(tr)
                 rectangle.set_color(.8,.6,.4)
                 viewer.add_geom(rectangle)
 
 
         if not (destination is None):
-            tr = rendering.Transform(translation=(destination[0], destination[1]))
-            polygon = rendering.make_circle(radius=destination_tolerance_range, res=30, filled=True)
+            tr = gym_rendering.Transform(translation=(destination[0], destination[1]))
+            polygon = gym_rendering.make_circle(radius=destination_tolerance_range, res=30, filled=True)
             polygon.add_attr(tr)
             polygon.set_color(1.0, 0., 0.)
             viewer.add_geom(polygon)
@@ -177,7 +178,7 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
         screen_height = (self.world.y_range[1] - self.world.y_range[0])
 
         if self.viewer is None:
-            self.viewer = rendering.Viewer(screen_width, screen_height)
+            self.viewer = gym_rendering.Viewer(screen_width, screen_height)
             self._append_elements_to_viewer(self.viewer,
                                             screen_width,
                                             screen_height,
@@ -189,7 +190,6 @@ class LimitedRangeBasedPOMDPNavigation2DEnv(gym.Env):
         self._plot_observation(self.viewer, self.state, self.observation)
 
         return self.viewer.render(return_rgb_array = mode=='rgb_array')
-
 
 class StateBasedMDPNavigation2DEnv(LimitedRangeBasedPOMDPNavigation2DEnv):
     logger = logging.getLogger(__name__)
