@@ -2,25 +2,27 @@ import numpy as np
 
 from gym import spaces
 from .proxy_env import ProxyEnv
+from.serializable import Serializable
 from gym.spaces.box import Box
 
 
-class NormalizedEnv(ProxyEnv):
+class NormalizedEnv(ProxyEnv, Serializable):
     def __init__(
             self,
             env,
             normalize_obs=False,
             obs_alpha=0.001,
     ):
+        Serializable.quick_init(self, locals())
         ProxyEnv.__init__(self, env)
         self._normalize_obs = normalize_obs
         self._obs_alpha = obs_alpha
-        self._obs_mean = np.zeros(env.observation_space.flat_dim)
-        self._obs_var = np.ones(env.observation_space.flat_dim)
+        self._obs_mean = np.zeros(np.prod(env.observation_space.shape))
+        self._obs_var = np.ones(np.prod(env.observation_space.shape))
 
 
     def _update_obs_estimate(self, obs):
-        flat_obs = self.wrapped_env.observation_space.flatten(obs)
+        flat_obs = self._wrapped_env.observation_space.flatten(obs)
         self._obs_mean = (1 - self._obs_alpha) * self._obs_mean + self._obs_alpha * flat_obs
         self._obs_var = (1 - self._obs_alpha) * self._obs_var + self._obs_alpha * np.square(flat_obs - self._obs_mean)
 
@@ -36,18 +38,16 @@ class NormalizedEnv(ProxyEnv):
             return ret
 
     @property
-    @overrides
     def action_space(self):
         if isinstance(self._wrapped_env.action_space, Box):
             ub = np.ones(self._wrapped_env.action_space.shape)
             return spaces.Box(-1 * ub, ub)
         return self._wrapped_env.action_space
 
-    @overrides
     def step(self, action):
         if isinstance(self._wrapped_env.action_space, Box):
             # rescale the action
-            lb, ub = self._wrapped_env.action_space.bounds
+            lb, ub = self._wrapped_env.action_space.low, self._wrapped_env.action_space.high
             scaled_action = lb + (action + 1.) * 0.5 * (ub - lb)
             scaled_action = np.clip(scaled_action, lb, ub)
         else:
