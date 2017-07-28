@@ -65,6 +65,23 @@ ImportError: Gtk* backend requires pygtk to be installed.
 ```
 the easiest fix is to switch backends for matplotlib. You can do this by setting `backend: TkAgg` in `~/.config/matplotlib/matplotlibrc` or `~/.matplotlib/matplotlibrc`
 
+## Usage
+
+For specific environments (you don't necessarily want to import the whole project)
+
+```python
+from gym_extensions.continuous import gym_navigation_2d
+env = gym.make("State-Based-Navigation-2d-Map1-Goal1-v0")
+```
+
+If you just want to be able to use all the environments (assumes you have the extra mujoco stuff):
+
+```python
+from gym_extensions
+env = gym.make("HopperWall-v0")
+```
+
+
 ## More info
 
 More information will be provided on our doc website: https://breakend.github.io/gym-extensions/
@@ -74,6 +91,10 @@ More information will be provided on our doc website: https://breakend.github.io
 To contributing environments please use the general directory structure we have in place and provide **pull requests**. We're still working on making this extension to OpenAI gym the best possible so things may change. Any changes to existing environments should involve an incremental update to the name of the environment (i.e. Hopper-v0 vs. Hopper-v1). If you are not associated with McGill and contribute significantly, please add your association to:
 
 <pre>docs/index.md</pre>
+
+## References
+
+Some of this work borrowed ideas and code from <a href="https://github.com/openai/rllab">OpenAI rllab</a> and <a href="https://github.com/openai/gym">OpenAI Gym</a>. We thank those creators for their work and cite links to reference code inline where possible.
 
 ## Contributors
 
