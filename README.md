@@ -74,10 +74,8 @@ from gym_extensions.continuous import gym_navigation_2d
 env = gym.make("State-Based-Navigation-2d-Map1-Goal1-v0")
 ```
 
-If you just want to be able to use all the environments (assumes you have the extra mujoco stuff):
-
 ```python
-from gym_extensions
+from gym_extensions.continuous import mujoco
 env = gym.make("HopperWall-v0")
 ```
 
