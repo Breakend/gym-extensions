@@ -2,7 +2,7 @@ import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
 import os.path as osp
-from gym_extensions.continuous.mujoco.wall_envs import WallEnvFactory
+from gym_extensions.continuous.mujoco.wall_envs import *
 from gym_extensions.continuous.mujoco.gravity_envs import GravityEnvFactory
 from gym_extensions.continuous.mujoco.perturbed_bodypart_env import ModifiedSizeEnvFactory
 
@@ -11,7 +11,9 @@ from gym.envs.mujoco.hopper import HopperEnv
 import os
 import gym
 
-HopperWallEnv = lambda *args, **kwargs : WallEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+HopperIceWall = lambda *args, **kwargs : IceWallFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
+
+HopperStairs = lambda *args, **kwargs : StairsFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", ori_ind=-1, *args, **kwargs)
 
 HopperGravityEnv = lambda *args, **kwargs : GravityEnvFactory(ModifiedHopperEnv)(model_path=os.path.dirname(gym.envs.mujoco.__file__) + "/assets/hopper.xml", *args, **kwargs)
 
