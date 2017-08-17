@@ -108,7 +108,7 @@ Here's a list of contributors!
 
 If you use this work please cite. If using the Space X environment, please also reference @vBarbaros for credit.
 
-bibtex```
+```
 @article{henderson2017multitask,
    author = {{Henderson}, P. and {Chang}, W.-D. and {Shkurti}, F. and {Hansen}, J. and 
 	{Meger}, D. and {Dudek}, G.},
