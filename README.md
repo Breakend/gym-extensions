@@ -106,7 +106,7 @@ Here's a list of contributors!
 
 ## Citation
 
-If you use this work please cite. If using the Space X environment, please also reference @vBarbaros for credit.
+If you use this work please use the following citation. If using the Space X environment, please also reference @vBarbaros for credit.
 
 ```
 @article{henderson2017multitask,
