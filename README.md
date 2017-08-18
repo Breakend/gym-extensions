@@ -113,7 +113,7 @@ If you use this work please use the following citation. If using the Space X env
    author = {{Henderson}, P. and {Chang}, W.-D. and {Shkurti}, F. and {Hansen}, J. and 
 	{Meger}, D. and {Dudek}, G.},
     title = {Benchmark Environments for Multitask Learning in Continuous Domains},
-  journal = {ICML 2017 Lifelong Learning: A Reinforcement Learning Approach Workshop},
+  journal = {ICML Lifelong Learning: A Reinforcement Learning Approach Workshop},
      year={2017}
 }
 ```
