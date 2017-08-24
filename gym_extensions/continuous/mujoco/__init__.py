@@ -32,7 +32,7 @@ custom_envs = {
                 dict(path='gym_extensions.continuous.mujoco.modified_ant:AntGravityEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
-                     kwargs= dict(gravity=-3.711)),            
+                     kwargs= dict(gravity=-3.711)),
             "AntGravityHalf-v0" :
                 dict(path='gym_extensions.continuous.mujoco.modified_ant:AntGravityEnv',
                      max_episode_steps=1000,
@@ -133,8 +133,8 @@ custom_envs = {
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
                      kwargs= dict()),
-            "HopperIceWall-v0" :
-                dict(path='gym_extensions.continuous.mujoco.modified_hopper:HopperIceWall',
+            "HopperSimpleWall-v0" :
+                dict(path='gym_extensions.continuous.mujoco.modified_hopper:HopperSimpleWallEnv',
                      max_episode_steps=1000,
                      reward_threshold=3800.0,
                      kwargs= dict()),

@@ -209,10 +209,10 @@ def WallEnvFactory(class_type):
     return WallEnv
 
 
-def IceWallFactory(class_type):
+def SimpleWallEnvFactory(class_type):
     """class_type should be an OpenAI gym time"""
 
-    class IceWallEnv(class_type, utils.EzPickle):
+    class SimpleWallEnv(class_type, utils.EzPickle):
         """
         This provides a frictionless wall, which the agent must try to
         jump/slide over. Not this also uses a simpler sensor readout than
@@ -307,12 +307,14 @@ def IceWallFactory(class_type):
 
             self.wall_pos = wall_pos = (rand_x, rand_y)
 
-            temp[1][0] = self.wall_pos[0]
-            temp[1][1] = self.wall_pos[1]
+            for i in range(self.num_walls):
+                temp[1+i][0] = self.wall_pos[0] + i * (self.space_between) * random.uniform(.8, 1.2)
+                temp[1+i][1] = self.wall_pos[1]
+
             self.model.geom_pos = temp
             self.model._compute_subtree()
             self.model.forward()
-            ob = super(IceWallEnv, self)._reset()
+            ob = super(SimpleWallEnv, self)._reset()
             return ob
 
         def _get_obs(self):
@@ -320,7 +322,7 @@ def IceWallFactory(class_type):
             # environment
 
 
-            terrain_read = np.zeros((6,))
+            terrain_read = np.zeros((10,))
             index_ratio = 2/1 # number of indices per meter. a ratio of 2 means each index is 0.5 long in mujoco coordinates
 
             robot_x, robot_y, robot_z = robot_coords = self.get_body_com("foot")
@@ -374,7 +376,7 @@ def IceWallFactory(class_type):
             return self.get_body_com("torso")[:2]
 
         def _step(self, action):
-            state, reward, done, info = super(IceWallEnv, self)._step(action)
+            state, reward, done, info = super(SimpleWallEnv, self)._step(action)
 
             next_obs = self._get_obs()
 
@@ -383,7 +385,7 @@ def IceWallFactory(class_type):
 
         def action_from_key(self, key):
             return self.action_from_key(key)
-    return IceWallEnv
+    return SimpleWallEnv
 
 
 def MazeFactory(class_type):
