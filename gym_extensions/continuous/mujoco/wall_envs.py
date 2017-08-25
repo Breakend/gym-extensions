@@ -323,34 +323,38 @@ def SimpleWallEnvFactory(class_type):
 
 
             terrain_read = np.zeros((10,))
-            index_ratio = 2/1 # number of indices per meter. a ratio of 2 means each index is 0.5 long in mujoco coordinates
+            index_ratio = 2.0/1.0 # number of indices per meter. a ratio of 2 means each index is 0.5 long in mujoco coordinates
 
             robot_x, robot_y, robot_z = robot_coords = self.get_body_com("foot")
             # import pdb;pdb.set_trace()
 
-            wall_length = self.wall_size[0] * 2
+            wall_length = self.wall_size[0] * 2.
+            max_read = wall_length * 5.
 
             for i in range(self.num_walls):
                 wall_startx = self.wall_pos[0]+i*self.space_between - self.wall_size[0]
                 wall_endx = self.wall_pos[0] + self.wall_size[0]
-                diff = wall_startx - (robot_x - 1/index_ratio)
 
-                if diff > 0.:
+                diff = wall_startx - (robot_x - 1.0/index_ratio)
+
+                if diff > 0. and diff <= max_read:
+                    # if the wall is after the robot
                     start_index = int(round(diff * index_ratio))
                     end_index = start_index + int(wall_length * index_ratio)
+                    terrain_read[start_index:end_index] = 1.
 
                 elif diff < 0. and diff >= -wall_length:
+                    # if the robot is on top of the wall
                     start_index = 0
 
-                    end_diff = wall_endx - (robot_x-1/index_ratio)
+                    end_diff = wall_endx - (robot_x-1./index_ratio)
                     end_index = int(round(end_diff * index_ratio))
+                    terrain_read[start_index:end_index] = 1.
                     # end_index = max(int(round(end_diff * index_ratio)),1)
-                elif diff < -wall_length:
+                elif diff < -wall_length and diff >= -max_read:
+                    # If the robot is after the wall
                     start_index=end_index =-1
-
-                terrain_read[start_index:end_index] = 1.
-
-
+                    terrain_read[start_index:end_index] = 1.
 
 
             obs = np.concatenate([
