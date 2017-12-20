@@ -105,7 +105,17 @@ Here's a list of contributors!
 + <a href="https://github.com/vBarbaros">@vBarbaros</a>
 + <a href="https://github.com/mklissa">@mklissa</a>
 
-## Citation
+## Who's using this?
+
+Works that have used this framework include:
+
+```
+Klissarov, Martin, Pierre-Luc Bacon, Jean Harb, and Doina Precup. "Learnings Options End-to-End for Continuous Action Tasks." arXiv preprint arXiv:1712.00004 (2017).
+
+Henderson, Peter, Wei-Di Chang, Pierre-Luc Bacon, David Meger, Joelle Pineau, and Doina Precup. "OptionGAN: Learning Joint Reward-Policy Options using Generative Adversarial Inverse Reinforcement Learning." arXiv preprint arXiv:1709.06683 (2017).
+```
+
+## Citation for this work!
 
 If you use this work please use the following citation. If using the Space X environment, please also reference @vBarbaros for credit.
 
